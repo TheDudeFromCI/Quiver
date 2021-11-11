@@ -1,0 +1,30 @@
+{
+  "name": "quiver",
+  "version": "1.0.0",
+  "description": "A webapp for designing node graphs based on the Vertex library.",
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDudeFromCI/Quiver.git"
+  },
+  "keywords": [
+    "node",
+    "graph",
+    "web",
+    "webapp",
+    "server"
+  ],
+  "author": "TheDudeFromCI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDudeFromCI/Quiver/issues"
+  },
+  "homepage": "https://github.com/TheDudeFromCI/Quiver#readme",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
