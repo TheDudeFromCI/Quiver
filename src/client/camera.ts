@@ -16,6 +16,7 @@ export class Camera
     private _xSmooth: number = this.x;
     private _ySmooth: number = this.y;
     private _zoomSmooth: number = this.zoom;
+    private _needsRepaint: boolean = true;
 
     constructor(canvas: HTMLCanvasElement)
     {
@@ -51,10 +52,21 @@ export class Camera
         return this._zoomSmooth;
     }
 
+    get needsRepaint(): boolean
+    {
+        return this._needsRepaint;
+    }
+
+    markRepainted(): void
+    {
+        this._needsRepaint = false;
+    }
+
     update(delta: number): void
     {
-        this.canvas.width = this.canvas.clientWidth;
-        this.canvas.height = this.canvas.clientHeight;
+        this._needsRepaint ||= Math.abs(this._xSmooth - this.x) > 0.01;
+        this._needsRepaint ||= Math.abs(this._ySmooth - this.y) > 0.01;
+        this._needsRepaint ||= Math.abs(this._zoomSmooth - this.zoom) > 0.01;
 
         delta /= Theme.CAMERA_SMOOTHING;
         this._xSmooth = lerp(this._xSmooth, this.x, delta);

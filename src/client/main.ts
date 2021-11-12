@@ -9,6 +9,9 @@ function main()
 
     const graph = new Graph(canvas);
     graph.start();
+
+    //@ts-ignore
+    globalThis['graph'] = graph;
 }
 
 $(main)

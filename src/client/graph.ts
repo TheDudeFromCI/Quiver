@@ -40,11 +40,30 @@ export class Graph
     private update(delta: number): void
     {
         this.camera.update(delta);
+        this.background.update();
     }
 
     private render(): void
     {
+        if (!this.needsRepaint()) return;
+
         this.background.render();
+
+        this.markRepainted();
+    }
+
+    private needsRepaint(): boolean
+    {
+        let needsRepaint = false;
+        needsRepaint ||= this.camera.needsRepaint;
+        needsRepaint ||= this.background.needsRepaint;
+        return needsRepaint;
+    }
+
+    private markRepainted(): void
+    {
+        this.camera.markRepainted();
+        this.background.markRepainted();
     }
 
     addNode(node: GraphNode): void

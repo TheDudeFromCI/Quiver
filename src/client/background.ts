@@ -4,14 +4,34 @@ import { Theme } from "./theme";
 export class Background
 {
     private readonly camera: Camera;
+    private _needsRepaint: boolean = true;
 
     constructor(camera: Camera)
     {
         this.camera = camera;
     }
 
+    get needsRepaint(): boolean
+    {
+        return this._needsRepaint;
+    }
+
+    markRepainted(): void
+    {
+        this._needsRepaint = false;
+    }
+
+    update(): void
+    {
+        this._needsRepaint ||= this.camera.canvas.width != this.camera.canvas.clientWidth;
+        this._needsRepaint ||= this.camera.canvas.height != this.camera.canvas.clientHeight;
+    }
+
     render(): void
     {
+        this.camera.canvas.width = this.camera.canvas.clientWidth;
+        this.camera.canvas.height = this.camera.canvas.clientHeight;
+
         this.fillBackground();
 
         if (Theme.DRAW_GRID)
