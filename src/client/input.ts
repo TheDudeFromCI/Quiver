@@ -1,4 +1,6 @@
 import { Camera } from "./camera";
+import { ContextMenu } from "./contextmenu";
+import { Position } from "./position";
 import { Theme } from "./theme";
 
 function clamp(x: number, min: number, max: number): number
@@ -8,20 +10,19 @@ function clamp(x: number, min: number, max: number): number
     return x;
 }
 
-type MousePosition = { x: number, y: number };
-
 export class Input
 {
     private readonly camera: Camera;
+    private readonly contextMenu: ContextMenu;
     private cameraDrag: boolean = false;
-    private mouseDown: boolean = false;
 
-    private mousePos: MousePosition = { x: 0, y: 0 };
-    private lastMousePos: MousePosition = { x: 0, y: 0 };
+    private mousePos: Position = new Position();
+    private lastMousePos: Position = new Position();
 
-    constructor(camera: Camera)
+    constructor(camera: Camera, contextMenu: ContextMenu)
     {
         this.camera = camera;
+        this.contextMenu = contextMenu;
 
         const canvas = this.camera.canvas;
         canvas.addEventListener('mousedown', e => this.onMouseDown(e));
@@ -40,10 +41,16 @@ export class Input
         this.lastMousePos.y = this.mousePos.y;
         this.cameraDrag = false;
 
-        if (e.button == 0) // Left click
-            this.mouseDown = true;
-        else if (e.button == 1) // Middle click
+        if (e.button === 0) // Left click
+        {
+            if (this.contextMenu.isVisible && !this.contextMenu.isInBounds(this.mousePos))
+                this.contextMenu.close();
+        }
+        else if (e.button === 1) // Middle click
+        {
             this.cameraDrag = true;
+            this.contextMenu.close();
+        }
     }
 
     private onMouseMove(e: MouseEvent): void
@@ -57,6 +64,9 @@ export class Input
             this.camera.pos.y += this.mousePos.y - this.lastMousePos.y;
         }
 
+        if (this.contextMenu.isVisible)
+            this.contextMenu.updateSelection(this.mousePos);
+
         this.lastMousePos.x = this.mousePos.x;
         this.lastMousePos.y = this.mousePos.y;
     }
@@ -64,8 +74,6 @@ export class Input
     private onMouseUp(e: MouseEvent): void
     {
         e.preventDefault();
-
-        this.mouseDown = false;
         this.cameraDrag = false;
     }
 
@@ -88,8 +96,9 @@ export class Input
     private onContextMenu(e: MouseEvent): void
     {
         e.preventDefault();
+        this.getMousePos(e);
 
-        if (this.mouseDown) return;
+        this.contextMenu.openAt(this.mousePos);
     }
 
     private getMousePos(e: MouseEvent): void

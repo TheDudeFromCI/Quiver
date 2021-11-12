@@ -12,6 +12,9 @@ function main(): void
     //@ts-ignore
     globalThis['graph'] = graph;
 
+    graph.contextMenu.addOption('this/is/sparta');
+    graph.contextMenu.addOption('this/is/my/menu');
+
     let lastFrame = 0;
     function mainLoop(time: number): void
     {

@@ -66,4 +66,25 @@ export const Theme = {
      * How much weight does one mouse wheel unit apply to the zoom level.
      */
     MOUSE_WHEEL_WEIGHT: 1 / 60,
+
+    /**
+     * The width of a node in pixels at the default zoom level.
+     */
+    NODE_WIDTH: 100,
+
+    /**
+     * The height of a plug on a node in pixels at the default zoom level.
+     */
+    NODE_PLUG_HEIGHT: 20,
+
+    /**
+     * The width of each window within the context menu in screen-space pixels.
+     */
+    CONTEXT_WINDOW_WIDTH: 150,
+
+    /**
+     * The height of a line of text within the context menu in screen-space
+     * pixels.
+     */
+    CONTEXT_WINDOW_LINE_HEIGHT: 25,
 };
