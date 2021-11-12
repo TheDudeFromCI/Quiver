@@ -1,10 +1,15 @@
 import { Camera } from "./camera";
+import { Bounds, Position } from "./position";
 import { Theme } from "./theme";
 
 export class Background
 {
     private readonly camera: Camera;
     private _needsRepaint: boolean = true;
+
+    // Buffers
+    private readonly bounds: Bounds = new Bounds();
+    private readonly gridPos: Position = new Position();
 
     constructor(camera: Camera)
     {
@@ -54,52 +59,49 @@ export class Background
         const height = this.camera.canvasHeight;
         const ctx = this.camera.ctx;
 
-        const minBounds = this.camera.screenToWorld(0, 0);
-        const maxBounds = this.camera.screenToWorld(width, height);
+        this.bounds.set(0, 0, width, height)
+        this.camera.screenToWorld(this.bounds);
         let step = Theme.GRID_SIZE;
 
         ctx.lineWidth = 1;
         ctx.strokeStyle = Theme.GRID_COLOR;
-        this.renderLines(ctx, minBounds, maxBounds, step, width, height);
+        this.renderLines(ctx, step);
 
         if (Theme.GRID_MAJOR_SEGMENTS > 0)
         {
             step *= Theme.GRID_MAJOR_SEGMENTS;
             ctx.strokeStyle = Theme.GRID_MAJOR_COLOR;
-            this.renderLines(ctx, minBounds, maxBounds, step, width, height);
+            this.renderLines(ctx, step);
         }
     }
 
-    private renderLines(ctx: CanvasRenderingContext2D,
-        minBounds: { x: number, y: number },
-        maxBounds: { x: number, y: number },
-        step: number,
-        width: number,
-        height: number): void
+    private renderLines(ctx: CanvasRenderingContext2D, step: number): void
     {
-        let minX = Math.ceil(minBounds.x / step) * step;
-        let maxX = Math.ceil(maxBounds.x / step) * step;
-        let minY = Math.ceil(minBounds.y / step) * step;
-        let maxY = Math.ceil(maxBounds.y / step) * step;
+        let minX = Math.ceil(this.bounds.min.x / step) * step;
+        let maxX = Math.ceil(this.bounds.max.x / step) * step;
+        let minY = Math.ceil(this.bounds.min.y / step) * step;
+        let maxY = Math.ceil(this.bounds.max.y / step) * step;
 
         for (let x = minX; x < maxX; x += step)
         {
-            const screenX = this.camera.worldToScreen(x, 0).x;
+            this.gridPos.set(x, 0);
+            this.camera.worldToScreen(this.gridPos);
 
             ctx.beginPath();
-            ctx.moveTo(screenX, 0);
-            ctx.lineTo(screenX, height);
+            ctx.moveTo(this.gridPos.x, 0);
+            ctx.lineTo(this.gridPos.x, this.camera.canvasHeight);
             ctx.closePath();
             ctx.stroke();
         }
 
         for (let y = minY; y < maxY; y += step)
         {
-            const screenY = this.camera.worldToScreen(0, y).y;
+            this.gridPos.set(0, y);
+            this.camera.worldToScreen(this.gridPos);
 
             ctx.beginPath();
-            ctx.moveTo(0, screenY);
-            ctx.lineTo(width, screenY);
+            ctx.moveTo(0, this.gridPos.y);
+            ctx.lineTo(this.camera.canvasWidth, this.gridPos.y);
             ctx.closePath();
             ctx.stroke();
         }

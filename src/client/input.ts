@@ -8,13 +8,16 @@ function clamp(x: number, min: number, max: number): number
     return x;
 }
 
+type MousePosition = { x: number, y: number };
+
 export class Input
 {
     private readonly camera: Camera;
-    private lastMouseX: number = 0;
-    private lastMouseY: number = 0;
     private cameraDrag: boolean = false;
     private mouseDown: boolean = false;
+
+    private mousePos: MousePosition = { x: 0, y: 0 };
+    private lastMousePos: MousePosition = { x: 0, y: 0 };
 
     constructor(camera: Camera)
     {
@@ -31,10 +34,10 @@ export class Input
     private onMouseDown(e: MouseEvent): void
     {
         e.preventDefault();
-        const { x: mouseX, y: mouseY } = this.camera.pageToScreen(e.pageX, e.pageY);
+        this.getMousePos(e);
 
-        this.lastMouseX = mouseX;
-        this.lastMouseY = mouseY;
+        this.lastMousePos.x = this.mousePos.x;
+        this.lastMousePos.y = this.mousePos.y;
         this.cameraDrag = false;
 
         if (e.button == 0) // Left click
@@ -46,16 +49,16 @@ export class Input
     private onMouseMove(e: MouseEvent): void
     {
         e.preventDefault();
-        const { x: mouseX, y: mouseY } = this.camera.pageToScreen(e.pageX, e.pageY);
+        this.getMousePos(e);
 
         if (this.cameraDrag)
         {
-            this.camera.x += mouseX - this.lastMouseX;
-            this.camera.y += mouseY - this.lastMouseY;
+            this.camera.pos.x += this.mousePos.x - this.lastMousePos.x;
+            this.camera.pos.y += this.mousePos.y - this.lastMousePos.y;
         }
 
-        this.lastMouseX = mouseX;
-        this.lastMouseY = mouseY;
+        this.lastMousePos.x = this.mousePos.x;
+        this.lastMousePos.y = this.mousePos.y;
     }
 
     private onMouseUp(e: MouseEvent): void
@@ -69,8 +72,8 @@ export class Input
     private onMouseWheel(e: WheelEvent): void
     {
         e.preventDefault();
+        this.getMousePos(e);
 
-        const { x: mouseX, y: mouseY } = this.camera.pageToScreen(e.pageX, e.pageY);
         const delta = e.deltaY * Theme.MOUSE_WHEEL_WEIGHT;
 
         let zoom: number;
@@ -78,8 +81,8 @@ export class Input
         else zoom = Math.pow(1 / Theme.ZOOM_DELTA, delta);
 
         this.camera.zoom = clamp(this.camera.zoom * zoom, Theme.MAX_ZOOM_OUT, Theme.MAX_ZOOM_IN);
-        this.camera.x = mouseX * this.camera.zoom - mouseX;
-        this.camera.y = mouseY * this.camera.zoom - mouseY;
+        this.camera.pos.x = this.mousePos.x * this.camera.zoom - this.mousePos.x;
+        this.camera.pos.y = this.mousePos.y * this.camera.zoom - this.mousePos.y;
     }
 
     private onContextMenu(e: MouseEvent): void
@@ -87,5 +90,17 @@ export class Input
         e.preventDefault();
 
         if (this.mouseDown) return;
+    }
+
+    private getMousePos(e: MouseEvent): void
+    {
+        this.mousePos.x = e.pageX;
+        this.mousePos.y = e.pageY;
+
+        const elem = this.camera.canvas;
+        let rect = elem.getBoundingClientRect();
+        let win = elem.ownerDocument.defaultView;
+        this.mousePos.x -= rect.left + (win?.scrollX ?? 0);
+        this.mousePos.y -= rect.top + (win?.scrollY ?? 0);
     }
 }
