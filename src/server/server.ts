@@ -45,13 +45,12 @@ export class WebServer
 
         const fileType = pathname.split('.').pop()?.toLowerCase() ?? "html";
         const mime = MIMES[fileType];
+        const filePath = process.cwd() + "/public" + pathname;
 
         try
         {
-            const filePath = process.cwd() + "/public" + pathname;
-            console.log(`Returning ${filePath}`);
-
             const data: Buffer = await fs.readFile(filePath);
+            console.log(`Returning ${filePath}`);
 
             res.writeHead(200, { 'Content-Type': mime.type });
             res.write(data, mime.binary ? 'binary' : 'utf8');
@@ -62,6 +61,8 @@ export class WebServer
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             res.write('Page not found!');
             res.end();
+
+            console.log(`File '${filePath}' not found!`);
         }
     }
 
