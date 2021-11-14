@@ -14,10 +14,12 @@ export class Input
 {
     private readonly camera: Camera;
     private readonly contextMenu: ContextMenu;
+    private readonly mousePos: Position = new Position();
+    private readonly lastMousePos: Position = new Position();
     private cameraDrag: boolean = false;
 
-    private mousePos: Position = new Position();
-    private lastMousePos: Position = new Position();
+    // Buffer
+    private readonly zoomCenter: Position = new Position();
 
     constructor(camera: Camera, contextMenu: ContextMenu)
     {
@@ -60,8 +62,8 @@ export class Input
 
         if (this.cameraDrag)
         {
-            this.camera.pos.x += this.mousePos.x - this.lastMousePos.x;
-            this.camera.pos.y += this.mousePos.y - this.lastMousePos.y;
+            this.camera.pos.x += (this.mousePos.x - this.lastMousePos.x) * this.camera.zoomSmooth;
+            this.camera.pos.y += (this.mousePos.y - this.lastMousePos.y) * this.camera.zoomSmooth;
         }
 
         if (this.contextMenu.isVisible)
@@ -88,9 +90,14 @@ export class Input
         if (delta < 0) zoom = Math.pow(Theme.ZOOM_DELTA, -delta);
         else zoom = Math.pow(1 / Theme.ZOOM_DELTA, delta);
 
+        this.zoomCenter.set(this.mousePos.x, this.mousePos.y);
+        this.camera.screenToWorld(this.zoomCenter, true);
+
         this.camera.zoom = clamp(this.camera.zoom * zoom, Theme.MAX_ZOOM_OUT, Theme.MAX_ZOOM_IN);
-        this.camera.pos.x = this.mousePos.x * this.camera.zoom - this.mousePos.x;
-        this.camera.pos.y = this.mousePos.y * this.camera.zoom - this.mousePos.y;
+
+        this.camera.screenToWorld(this.mousePos, true);
+        this.camera.pos.x += this.mousePos.x - this.zoomCenter.x;
+        this.camera.pos.y += this.mousePos.y - this.zoomCenter.y;
     }
 
     private onContextMenu(e: MouseEvent): void

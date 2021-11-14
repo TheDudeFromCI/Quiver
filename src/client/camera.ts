@@ -66,12 +66,15 @@ export class Camera
         this._zoomSmooth = lerp(this._zoomSmooth, this.zoom, delta);
     }
 
-    screenToWorld(pos: Position | Bounds): void
+    screenToWorld(pos: Position | Bounds, targetPos: boolean = false): void
     {
+        const zoom = targetPos ? this.zoom : this._zoomSmooth;
+        const camPos = targetPos ? this.pos : this._posSmooth;
+
         if (pos instanceof Position)
         {
-            pos.x = pos.x * this._zoomSmooth - this._posSmooth.x;
-            pos.y = pos.y * this._zoomSmooth - this._posSmooth.y;
+            pos.x = pos.x * zoom - camPos.x;
+            pos.y = pos.y * zoom - camPos.y;
         }
         else
         {

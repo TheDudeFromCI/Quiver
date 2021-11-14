@@ -37,7 +37,7 @@ export class WebServer
      */
     private async handleRequest(req: IncomingMessage, res: ServerResponse): Promise<void>
     {
-        console.log(`Handling request for ${req.url}`);
+        console.log(`Handling request for '${req.url}' from [${req.socket.localAddress}].`);
 
         const url = new URL(req.url ?? '/', `http://${req.headers.host}`);
         let pathname = url.pathname;
