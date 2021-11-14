@@ -114,4 +114,19 @@ export const Theme = {
      * pixels.
      */
     CONTEXT_WINDOW_LINE_HEIGHT: 25,
+
+    /**
+     * The background color of the context menu.
+     */
+    CONTEXT_MENU_COLOR: '#050505',
+
+    /**
+     * The background color of selected elements within the context menu.
+     */
+    CONTEXT_MENU_SELECTED_COLOR: '#333333',
+
+    /**
+     * The color of text within the context menu.
+     */
+    CONTEXT_MENU_TEXT_COLOR: '#999999',
 };

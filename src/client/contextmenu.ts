@@ -42,18 +42,18 @@ export class ContextWindow
     {
         const ctx = this.camera.ctx;
 
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = Theme.CONTEXT_MENU_COLOR;
         ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
 
         if (this.selectedOption != null)
         {
             const selectedY = this.pos.y + this.options.indexOf(this.selectedOption) * Theme.CONTEXT_WINDOW_LINE_HEIGHT;
 
-            ctx.fillStyle = '#333333';
+            ctx.fillStyle = Theme.CONTEXT_MENU_SELECTED_COLOR;
             ctx.fillRect(this.pos.x, selectedY, this.width, Theme.CONTEXT_WINDOW_LINE_HEIGHT);
         }
 
-        ctx.fillStyle = '#999999';
+        ctx.fillStyle = Theme.CONTEXT_MENU_TEXT_COLOR;
         ctx.font = '16px Calibri';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
