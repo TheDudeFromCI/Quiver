@@ -2,6 +2,8 @@ import { Graph } from "./graph";
 import $ from 'jquery';
 import { Plug } from "./plug";
 import { NodeType } from "./nodetype";
+import { ContextMenuAction } from "./contextmenu";
+import { Position } from "./position";
 
 function main(): void
 {
@@ -14,12 +16,21 @@ function main(): void
     //@ts-ignore
     globalThis['graph'] = graph;
 
-    graph.contextMenu.addOption('this/is/sparta');
-    graph.contextMenu.addOption('this/is/my/menu');
-    const nodeA = graph.nodeHandler.addNode(new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
-    const nodeB = graph.nodeHandler.addNode(new NodeType('Subtract', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
-    nodeB.pos.set(150, 80);
-    graph.nodeHandler.addConnection(nodeA, nodeB, 0, 1);
+    function addNode(type: NodeType): ContextMenuAction
+    {
+        return (mousePos: Position) =>
+        {
+            const n = graph.nodeHandler.addNode(type);
+            n.pos.set(mousePos.x, mousePos.y);
+            graph.camera.screenToWorld(n.pos);
+        }
+    }
+
+    const add = new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]);
+    const subtract = new NodeType('Subtract', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]);
+
+    graph.contextMenu.addOption('math/add', addNode(add));
+    graph.contextMenu.addOption('math/subtract', addNode(subtract));
 
     let lastFrame = 0;
     function mainLoop(time: number): void

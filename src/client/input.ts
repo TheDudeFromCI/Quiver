@@ -82,7 +82,12 @@ export class Input
         if (!document.hasFocus()) return;
 
         e.preventDefault();
+        this.getMousePos(e);
+
         this.cameraDrag = false;
+
+        // Does nothing if menu is hidden
+        this.contextMenu.selectOptionAt(this.mousePos);
     }
 
     private onMouseWheel(e: WheelEvent): void

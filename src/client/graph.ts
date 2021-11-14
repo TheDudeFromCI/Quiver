@@ -43,6 +43,7 @@ export class Graph
         let needsRepaint = false;
         needsRepaint ||= this.camera.needsRepaint;
         needsRepaint ||= this.background.needsRepaint;
+        needsRepaint ||= this.nodeHandler.needsRepaint;
         needsRepaint ||= this.contextMenu.needsRepaint;
         return needsRepaint;
     }
@@ -51,6 +52,7 @@ export class Graph
     {
         this.camera.markRepainted();
         this.background.markRepainted();
+        this.nodeHandler.markRepainted();
         this.contextMenu.markRepainted();
     }
 }

@@ -2,6 +2,8 @@ import { Camera } from "./camera";
 import { Position } from "./position";
 import { Theme } from "./theme";
 
+export type ContextMenuAction = (mousePos: Position) => void;
+
 export class ContextWindow
 {
     public readonly pos: Position = new Position();
@@ -11,6 +13,7 @@ export class ContextWindow
     private readonly camera: Camera;
     private readonly options: string[] = [];
     private readonly children: Record<string, ContextWindow> = {};
+    private readonly actions: Record<string, ContextMenuAction> = {};
     private renderedChild?: ContextWindow;
     private selectedOption?: string;
 
@@ -64,24 +67,27 @@ export class ContextWindow
         this.renderedChild?.render();
     }
 
-    addOption(path: string[]): void
+    addOption(path: string[], action: ContextMenuAction): void
     {
         if (path.length === 1)
         {
             if (!this.options.includes(path[0]))
+            {
                 this.options.push(path[0]);
+                this.actions[path[0]] = action;
+            }
             return;
         }
 
         if (this.children[path[0]] != null)
         {
-            this.children[path[0]].addOption(path.slice(1));
+            this.children[path[0]].addOption(path.slice(1), action);
             return;
         }
 
         const child = new ContextWindow(path[0], this.camera);
         child.offset.set(this.offset.x + this.width, this.offset.y + this.height);
-        child.addOption(path.slice(1));
+        child.addOption(path.slice(1), action);
 
         this.options.push(path[0]);
         this.children[path[0]] = child;
@@ -144,6 +150,19 @@ export class ContextWindow
         for (let child in this.children)
             this.children[child].closeAll();
     }
+
+    selectOptionAt(mousePos: Position, recursive: boolean): void
+    {
+        const option = this.getOptionAt(mousePos);
+        if (option != null)
+        {
+            this.actions[option](mousePos);
+            return;
+        }
+
+        if (recursive)
+            this.renderedChild?.selectOptionAt(mousePos, recursive);
+    }
 }
 
 export class ContextMenu
@@ -203,21 +222,35 @@ export class ContextMenu
         this._needsRepaint = true;
     }
 
-    addOption(option: string): void
+    addOption(option: string, action: ContextMenuAction): void
     {
+        const onPress = (mp: Position) =>
+        {
+            this.close();
+            action(mp);
+        };
+
         const path = option.split('/');
-        this.rootWindow.addOption(path);
+        this.rootWindow.addOption(path, onPress);
         this._needsRepaint = true;
     }
 
     isInBounds(pos: Position): boolean
     {
+        if (!this.visible) return false;
         return this.rootWindow.isInBounds(pos, true);
     }
 
     updateSelection(pos: Position): void
     {
+        if (!this.visible) return;
         const updated = this.rootWindow.updateSelection(pos, true);
         this._needsRepaint ||= updated;
+    }
+
+    selectOptionAt(mousePos: Position): void
+    {
+        if (!this.visible) return;
+        this.rootWindow.selectOptionAt(mousePos, true);
     }
 }
