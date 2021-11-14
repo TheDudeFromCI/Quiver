@@ -135,6 +135,15 @@ export class ContextWindow
 
         return updated;
     }
+
+    closeAll(): void
+    {
+        this.renderedChild = undefined;
+        this.selectedOption = undefined;
+
+        for (let child in this.children)
+            this.children[child].closeAll();
+    }
 }
 
 export class ContextMenu
@@ -190,6 +199,7 @@ export class ContextMenu
         if (!this.visible) return;
 
         this.visible = false;
+        this.rootWindow.closeAll();
         this._needsRepaint = true;
     }
 
