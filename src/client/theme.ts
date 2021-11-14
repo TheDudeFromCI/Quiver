@@ -78,6 +78,33 @@ export const Theme = {
     NODE_PLUG_HEIGHT: 20,
 
     /**
+     * The background color of nodes.
+     */
+    NODE_COLOR: '#777777',
+
+    /**
+     * The color of text on nodes.
+     */
+    NODE_TEXT_COLOR: '#cccccc',
+
+    /**
+     * The amount of space in pixels at the default zoom level to allocate for
+     * rendering the plug on a node.
+     */
+    PLUG_SIZE: 9,
+
+    /**
+     * How much space to place between the plug text and the edge of the node,
+     * in pixels at the default zoom level.
+     */
+    PLUG_BUFFER_SIZE: 15,
+
+    /**
+     * The color of plugs.
+     */
+    PLUG_COLOR: '#444444',
+
+    /**
      * The width of each window within the context menu in screen-space pixels.
      */
     CONTEXT_WINDOW_WIDTH: 150,

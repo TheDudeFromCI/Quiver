@@ -2,22 +2,22 @@ import { Background } from "./background";
 import { Camera } from "./camera";
 import { ContextMenu } from "./contextmenu";
 import { Input } from "./input";
-import { GraphNode } from "./node";
+import { NodeHandler } from "./nodehandler";
 
 export class Graph
 {
     public readonly camera: Camera;
     public readonly background: Background;
     public readonly contextMenu: ContextMenu;
+    public readonly nodeHandler: NodeHandler;
     public readonly input: Input;
-
-    private nodes: GraphNode[] = [];
 
     constructor(canvas: HTMLCanvasElement)
     {
         this.camera = new Camera(canvas);
         this.background = new Background(this.camera);
         this.contextMenu = new ContextMenu(this.camera);
+        this.nodeHandler = new NodeHandler(this.camera);
         this.input = new Input(this.camera, this.contextMenu);
     }
 
@@ -32,6 +32,7 @@ export class Graph
         if (!this.needsRepaint()) return;
 
         this.background.render();
+        this.nodeHandler.render();
         this.contextMenu.render();
 
         this.markRepainted();
@@ -51,10 +52,5 @@ export class Graph
         this.camera.markRepainted();
         this.background.markRepainted();
         this.contextMenu.markRepainted();
-    }
-
-    addNode(node: GraphNode): void
-    {
-        this.nodes.push(node);
     }
 }

@@ -1,5 +1,7 @@
 import { Graph } from "./graph";
 import $ from 'jquery';
+import { Plug } from "./plug";
+import { NodeType } from "./nodetype";
 
 function main(): void
 {
@@ -14,6 +16,7 @@ function main(): void
 
     graph.contextMenu.addOption('this/is/sparta');
     graph.contextMenu.addOption('this/is/my/menu');
+    graph.nodeHandler.addNode(new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
 
     let lastFrame = 0;
     function mainLoop(time: number): void
