@@ -3,6 +3,8 @@ import { Theme } from "./theme";
 
 function lerp(a: number, b: number, t: number): number
 {
+    if (t <= 0) return a;
+    if (t >= 1) return b;
     return a * (1 - t) + b * t;
 }
 
@@ -24,6 +26,8 @@ export class Camera
         const ctx = canvas.getContext('2d');
         if (ctx == null) throw new Error('Canvas is not renderable!');
         else this.ctx = ctx;
+
+        this.canvas.tabIndex = 1;
     }
 
     get canvasWidth(): number

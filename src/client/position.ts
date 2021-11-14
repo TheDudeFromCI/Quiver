@@ -18,6 +18,8 @@ export class Position
 
     lerpTo(pos: Position, t: number): void
     {
+        if (t <= 0) t = 0;
+        if (t >= 1) t = 1;
         this.x = this.x * (1 - t) + pos.x * t;
         this.y = this.y * (1 - t) + pos.y * t;
     }

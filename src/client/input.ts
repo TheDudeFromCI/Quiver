@@ -36,6 +36,8 @@ export class Input
 
     private onMouseDown(e: MouseEvent): void
     {
+        if (!document.hasFocus()) return;
+
         e.preventDefault();
         this.getMousePos(e);
 
@@ -57,6 +59,8 @@ export class Input
 
     private onMouseMove(e: MouseEvent): void
     {
+        if (!document.hasFocus()) return;
+
         e.preventDefault();
         this.getMousePos(e);
 
@@ -75,12 +79,16 @@ export class Input
 
     private onMouseUp(e: MouseEvent): void
     {
+        if (!document.hasFocus()) return;
+
         e.preventDefault();
         this.cameraDrag = false;
     }
 
     private onMouseWheel(e: WheelEvent): void
     {
+        if (!document.hasFocus()) return;
+
         e.preventDefault();
         this.getMousePos(e);
 
@@ -102,6 +110,8 @@ export class Input
 
     private onContextMenu(e: MouseEvent): void
     {
+        if (!document.hasFocus()) return;
+
         e.preventDefault();
         this.getMousePos(e);
 

@@ -50,7 +50,7 @@ export class GraphNode
         ctx.textBaseline = 'middle';
 
         y += lineHeight * 0.5;
-        ctx.fillText(this.type.name, x + width / 2, y);
+        ctx.fillText(this.type.name, x + width / 2, y + 2);
 
         ctx.textAlign = 'left';
         for (let plug of this.type.inputs)
@@ -63,7 +63,7 @@ export class GraphNode
             ctx.fill();
 
             ctx.fillStyle = Theme.NODE_TEXT_COLOR
-            ctx.fillText(plug.name, x + plugBuffer, y);
+            ctx.fillText(plug.name, x + plugBuffer, y + 2);
         }
 
         ctx.textAlign = 'right';
@@ -77,7 +77,7 @@ export class GraphNode
             ctx.fill();
 
             ctx.fillStyle = Theme.NODE_TEXT_COLOR
-            ctx.fillText(plug.name, x + width - plugBuffer, y);
+            ctx.fillText(plug.name, x + width - plugBuffer, y + 2);
         }
     }
 }
