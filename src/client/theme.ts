@@ -129,4 +129,14 @@ export const Theme = {
      * The color of text within the context menu.
      */
     CONTEXT_MENU_TEXT_COLOR: '#999999',
+
+    /**
+     * The color of connection lines between nodes.
+     */
+    CONNECTION_COLOR: '#999900',
+
+    /**
+     * How thick to render the connection lines, in pixels.
+     */
+    CONNECTION_THICKNESS: 2,
 };

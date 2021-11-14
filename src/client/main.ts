@@ -16,7 +16,10 @@ function main(): void
 
     graph.contextMenu.addOption('this/is/sparta');
     graph.contextMenu.addOption('this/is/my/menu');
-    graph.nodeHandler.addNode(new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
+    const nodeA = graph.nodeHandler.addNode(new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
+    const nodeB = graph.nodeHandler.addNode(new NodeType('Subtract', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')]));
+    nodeB.pos.set(150, 80);
+    graph.nodeHandler.addConnection(nodeA, nodeB, 0, 1);
 
     let lastFrame = 0;
     function mainLoop(time: number): void
