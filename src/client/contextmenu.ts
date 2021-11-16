@@ -156,7 +156,7 @@ export class ContextWindow
         const option = this.getOptionAt(mousePos);
         if (option != null)
         {
-            this.actions[option](mousePos);
+            this.actions[option]?.(mousePos);
             return;
         }
 

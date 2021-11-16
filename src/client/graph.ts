@@ -1,8 +1,10 @@
 import { Background } from "./background";
 import { Camera } from "./camera";
 import { ContextMenu } from "./contextmenu";
+import { DragHandler } from "./draghandler";
 import { Input } from "./input";
 import { NodeHandler } from "./nodehandler";
+import { Selection } from "./selection";
 
 export class Graph
 {
@@ -10,6 +12,8 @@ export class Graph
     public readonly background: Background;
     public readonly contextMenu: ContextMenu;
     public readonly nodeHandler: NodeHandler;
+    public readonly dragHandler: DragHandler;
+    public readonly selection: Selection;
     public readonly input: Input;
 
     constructor(canvas: HTMLCanvasElement)
@@ -18,6 +22,8 @@ export class Graph
         this.background = new Background(this.camera);
         this.contextMenu = new ContextMenu(this.camera);
         this.nodeHandler = new NodeHandler(this.camera);
+        this.dragHandler = new DragHandler(this.camera);
+        this.selection = new Selection(this.dragHandler, this.nodeHandler);
         this.input = new Input(this.camera, this.contextMenu);
     }
 
@@ -33,6 +39,7 @@ export class Graph
 
         this.background.render();
         this.nodeHandler.render();
+        this.selection.render(this.camera.ctx);
         this.contextMenu.render();
 
         this.markRepainted();
@@ -44,6 +51,7 @@ export class Graph
         needsRepaint ||= this.camera.needsRepaint;
         needsRepaint ||= this.background.needsRepaint;
         needsRepaint ||= this.nodeHandler.needsRepaint;
+        needsRepaint ||= this.selection.needsRepaint;
         needsRepaint ||= this.contextMenu.needsRepaint;
         return needsRepaint;
     }

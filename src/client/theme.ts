@@ -83,6 +83,11 @@ export const Theme = {
     NODE_COLOR: '#777777',
 
     /**
+     * The color of node borders when they are selected.
+     */
+    NODE_SELECTED_COLOR: '#FFFF00',
+
+    /**
      * The color of text on nodes.
      */
     NODE_TEXT_COLOR: '#cccccc',
@@ -138,5 +143,5 @@ export const Theme = {
     /**
      * How thick to render the connection lines, in pixels.
      */
-    CONNECTION_THICKNESS: 2,
+    CONNECTION_THICKNESS: 3,
 };

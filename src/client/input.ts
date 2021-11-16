@@ -9,7 +9,6 @@ function clamp(x: number, min: number, max: number): number
     if (x > max) return max;
     return x;
 }
-
 export class Input
 {
     private readonly camera: Camera;

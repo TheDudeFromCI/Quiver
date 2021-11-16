@@ -36,10 +36,31 @@ export class Bounds
     public readonly min: Position = new Position();
     public readonly max: Position = new Position();
 
+    constructor(x: number = 0, y: number = 0, width: number = 0, height: number = 0)
+    {
+        this.set(x, y, width, height);
+    }
+
     set(x: number, y: number, width: number, height: number): void
     {
         this.min.set(x, y);
         this.max.set(x + width, y + height);
+    }
+
+    setBetween(a: Position, b: Position): void
+    {
+        this.min.set(Math.min(a.x, b.x), Math.min(a.y, b.y));
+        this.max.set(Math.max(a.x, b.x), Math.max(a.y, b.y));
+    }
+
+    get x(): number
+    {
+        return this.min.x;
+    }
+
+    get y(): number
+    {
+        return this.min.y;
     }
 
     get width(): number

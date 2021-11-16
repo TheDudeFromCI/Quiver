@@ -2,6 +2,7 @@ import { Camera } from "./camera";
 import { Connection } from "./connection";
 import { GraphNode } from "./node";
 import { NodeType } from "./nodetype";
+import { Bounds, Position } from "./position";
 
 export class NodeHandler
 {
@@ -48,5 +49,24 @@ export class NodeHandler
 
         for (let node of this.nodes)
             node.render(this.camera);
+    }
+
+    getNodeAt(worldPos: Position): GraphNode | undefined
+    {
+        return this.nodes.find(n => n.pos.x <= worldPos.x && n.pos.x + n.width >= worldPos.x
+            && n.pos.y <= worldPos.y && n.pos.y + n.height >= worldPos.y);
+    }
+
+    getNodesInRegion(bounds: Bounds): GraphNode[]
+    {
+        return this.nodes.filter(n => this.aabbCollision(n, bounds));
+    }
+
+    private aabbCollision(node: GraphNode, bounds: Bounds): boolean
+    {
+        return node.x < bounds.x + bounds.width &&
+            node.x + node.width > bounds.x &&
+            node.y < bounds.y + bounds.height &&
+            node.y + node.height > bounds.y;
     }
 }
