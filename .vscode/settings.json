@@ -9,6 +9,7 @@
         "node_modules": true,
         "package-lock.json": true,
         "build": true,
+        "out": true,
         "public/quiver.js": true
     }
 }
