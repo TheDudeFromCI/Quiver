@@ -3,7 +3,7 @@ import { GraphNode } from "./node";
 import { NodeHandler } from "./nodehandler";
 import { Bounds } from "./position";
 
-export class Selection implements MouseListener
+export class NodeSelection implements MouseListener
 {
     private readonly nodeHandler: NodeHandler;
     private selNodes: GraphNode[] = [];

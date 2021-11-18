@@ -3,7 +3,7 @@ import { Camera, CameraControls } from "./camera";
 import { ContextMenu } from "./contextmenu";
 import { InputHandler } from "./inputhandler";
 import { NodeHandler } from "./nodehandler";
-import { Selection } from "./selection";
+import { NodeSelection } from "./nodeselection";
 
 export class Graph
 {
@@ -12,7 +12,7 @@ export class Graph
     public readonly cameraControls: CameraControls;
     public readonly background: Background;
     public readonly nodeHandler: NodeHandler;
-    public readonly selection: Selection;
+    public readonly selection: NodeSelection;
     public readonly contextMenu: ContextMenu;
 
     constructor(canvas: HTMLCanvasElement)
@@ -22,7 +22,7 @@ export class Graph
         this.cameraControls = new CameraControls(this.camera, this.inputHandler);
         this.background = new Background(this.camera);
         this.nodeHandler = new NodeHandler(this.camera);
-        this.selection = new Selection(this.inputHandler, this.nodeHandler);
+        this.selection = new NodeSelection(this.inputHandler, this.nodeHandler);
         this.contextMenu = new ContextMenu(this.camera, this.inputHandler);
     }
 
