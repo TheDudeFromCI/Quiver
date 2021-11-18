@@ -1,5 +1,4 @@
 import { Graph } from "./graph";
-import $ from 'jquery';
 import { Plug } from "./plug";
 import { NodeType } from "./nodetype";
 import { ContextMenuAction } from "./contextmenu";
@@ -50,4 +49,4 @@ function main(): void
     requestAnimationFrame(mainLoop);
 }
 
-$(main)
+window.addEventListener('DOMContentLoaded', main);

@@ -4,13 +4,17 @@
 <head>
     <title>Quiver</title>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'">
 
     <link rel="stylesheet" href="index.css">
-    <script type="text/javascript" src="index.js"></script>
 </head>
 
 <body>
     <canvas id='node-canvas'></canvas>
+    <script type="text/javascript" src="quiver.js"></script>
 </body>
 
 </html>

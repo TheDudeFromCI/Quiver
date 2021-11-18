@@ -2,12 +2,12 @@
   "name": "quiver",
   "version": "1.0.0",
   "description": "A webapp for designing node graphs based on the Vertex library.",
-  "main": "lib/main.js",
+  "main": "public/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "tsc && browserify lib/client/main.js --outfile public/index.js",
-    "start": "node lib/server/main.js"
+    "build": "tsc && browserify build/main.js --outfile public/quiver.js",
+    "start": "electron public/app.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "electron": "^16.0.0",
     "jquery": "^3.6.0",
     "url": "^0.11.0"
   }
