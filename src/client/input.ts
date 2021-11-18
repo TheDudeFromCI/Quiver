@@ -15,7 +15,6 @@ export class Input
     private readonly contextMenu: ContextMenu;
     private readonly mousePos: Position = new Position();
     private readonly lastMousePos: Position = new Position();
-    private cameraDrag: boolean = false;
 
     // Buffer
     private readonly zoomCenter: Position = new Position();
@@ -42,7 +41,6 @@ export class Input
 
         this.lastMousePos.x = this.mousePos.x;
         this.lastMousePos.y = this.mousePos.y;
-        this.cameraDrag = false;
 
         if (e.button === 0) // Left click
         {
@@ -51,7 +49,6 @@ export class Input
         }
         else if (e.button === 1) // Middle click
         {
-            this.cameraDrag = true;
             this.contextMenu.close();
         }
     }
@@ -62,12 +59,6 @@ export class Input
 
         e.preventDefault();
         this.getMousePos(e);
-
-        if (this.cameraDrag)
-        {
-            this.camera.pos.x += (this.mousePos.x - this.lastMousePos.x) * this.camera.zoomSmooth;
-            this.camera.pos.y += (this.mousePos.y - this.lastMousePos.y) * this.camera.zoomSmooth;
-        }
 
         if (this.contextMenu.isVisible)
             this.contextMenu.updateSelection(this.mousePos);
@@ -82,8 +73,6 @@ export class Input
 
         e.preventDefault();
         this.getMousePos(e);
-
-        this.cameraDrag = false;
 
         // Does nothing if menu is hidden
         this.contextMenu.selectOptionAt(this.mousePos);

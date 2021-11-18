@@ -1,5 +1,5 @@
 import { Background } from "./background";
-import { Camera } from "./camera";
+import { Camera, CameraControls } from "./camera";
 import { ContextMenu } from "./contextmenu";
 import { DragHandler } from "./draghandler";
 import { Input } from "./input";
@@ -15,6 +15,7 @@ export class Graph
     public readonly dragHandler: DragHandler;
     public readonly selection: Selection;
     public readonly input: Input;
+    public readonly cameraControls: CameraControls;
 
     constructor(canvas: HTMLCanvasElement)
     {
@@ -25,6 +26,7 @@ export class Graph
         this.dragHandler = new DragHandler(this.camera);
         this.selection = new Selection(this.dragHandler, this.nodeHandler);
         this.input = new Input(this.camera, this.contextMenu);
+        this.cameraControls = new CameraControls(this.camera, this.dragHandler);
     }
 
     update(delta: number): void

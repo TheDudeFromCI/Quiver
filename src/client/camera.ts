@@ -1,3 +1,4 @@
+import { DragHandler, DragListener, MouseInfo } from "./draghandler";
 import { Bounds, Position } from "./position";
 import { Theme } from "./theme";
 
@@ -99,5 +100,23 @@ export class Camera
             this.worldToScreen(pos.min);
             this.worldToScreen(pos.max);
         }
+    }
+}
+
+export class CameraControls implements DragListener
+{
+    private readonly camera: Camera;
+
+    constructor(camera: Camera, dragHandler: DragHandler)
+    {
+        this.camera = camera;
+        dragHandler.addListener(this);
+    }
+
+    dragUpdated(mouse: MouseInfo): void
+    {
+        if (mouse.button !== 1) return;
+        this.camera.pos.x += mouse.deltaPos.x;
+        this.camera.pos.y += mouse.deltaPos.y;
     }
 }
