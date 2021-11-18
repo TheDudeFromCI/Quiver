@@ -23,6 +23,8 @@ function main(): void
             const n = graph.nodeHandler.addNode(type);
             n.pos.set(mousePos.x, mousePos.y);
             graph.camera.screenToWorld(n.pos);
+            n.pos.x -= n.width / 2;
+            n.pos.y -= n.height / 2;
         }
     }
 
