@@ -39,6 +39,14 @@ export class NodeSelection implements MouseListener
         if (mouse.button !== 0) return;
 
         const node = this.nodeHandler.getNodeAt(mouse.pos);
+        const plug = node?.getPlugAt(mouse.pos) ?? -1;
+
+        if (plug !== -1)
+        {
+            for (let n of this.selNodes) n.selected = false;
+            this.selNodes = [];
+            return;
+        }
 
         if (node == null)
         {

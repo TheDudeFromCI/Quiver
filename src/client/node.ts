@@ -128,4 +128,26 @@ export class GraphNode
             ctx.fillText(plug.name, x + width - plugBuffer, y + 2);
         }
     }
+
+    getPlugAt(pos: Position): number
+    {
+        let x = this.x + Theme.PLUG_BUFFER_SIZE / 2;
+        let y = this.y + Theme.NODE_PLUG_HEIGHT * 1.5;
+
+        for (let i = 0; i < this.type.inputs.length; i++)
+        {
+            if (pos.distance(x, y) <= Theme.PLUG_BUFFER_SIZE / 2) return i;
+            y += Theme.NODE_PLUG_HEIGHT;
+        }
+
+        x = this.x + this.width - Theme.PLUG_BUFFER_SIZE / 2;
+
+        for (let i = 0; i < this.type.outputs.length; i++)
+        {
+            if (pos.distance(x, y) <= Theme.PLUG_BUFFER_SIZE / 2) return i + this.type.inputs.length;
+            y += Theme.NODE_PLUG_HEIGHT;
+        }
+
+        return -1;
+    }
 }

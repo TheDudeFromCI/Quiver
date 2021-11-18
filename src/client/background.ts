@@ -21,21 +21,12 @@ export class Background
         return this._needsRepaint;
     }
 
-    markRepainted(): void
-    {
-        this._needsRepaint = false;
-    }
-
-    update(): void
-    {
-        this._needsRepaint ||= this.camera.canvas.width != this.camera.canvas.clientWidth;
-        this._needsRepaint ||= this.camera.canvas.height != this.camera.canvas.clientHeight;
-    }
-
     render(): void
     {
+        this._needsRepaint = false;
         this.camera.canvas.width = this.camera.canvas.clientWidth;
         this.camera.canvas.height = this.camera.canvas.clientHeight;
+        this.camera.canvas.width = this.camera.canvas.clientWidth;
 
         this.fillBackground();
 

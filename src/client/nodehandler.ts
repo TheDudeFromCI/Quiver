@@ -21,11 +21,6 @@ export class NodeHandler
         return this._needsRepaint;
     }
 
-    markRepainted(): void
-    {
-        this._needsRepaint = false;
-    }
-
     addNode(type: NodeType): GraphNode
     {
         const node = new GraphNode(type);
@@ -44,6 +39,8 @@ export class NodeHandler
 
     render(): void
     {
+        this._needsRepaint = false;
+
         for (let connection of this.connections)
             connection.render(this.camera);
 
@@ -68,5 +65,16 @@ export class NodeHandler
             node.x + node.width > bounds.x &&
             node.y < bounds.y + bounds.height &&
             node.y + node.height > bounds.y;
+    }
+
+    isNodeDecendantOf(src: GraphNode, tgt: GraphNode): boolean
+    {
+        if (src === tgt) return true;
+
+        for (let connection of this.connections)
+            if (connection.nodeB === src && this.isNodeDecendantOf(connection.nodeA, tgt))
+                return true;
+
+        return false;
     }
 }

@@ -9,11 +9,14 @@ export class Position
         this.y = y;
     }
 
-    distanceSquared(pos: Position): number
+    distance(pos: Position | number, _y?: number): number
     {
-        const dx = this.x - pos.x;
-        const dy = this.y - pos.y;
-        return dx * dx + dy * dy;
+        const x: number = (pos as Position)?.x ?? pos;
+        const y: number = (pos as Position)?.y ?? _y;
+
+        const dx = this.x - x;
+        const dy = this.y - y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     lerpTo(pos: Position, t: number): void

@@ -195,13 +195,10 @@ export class ContextMenu implements MouseListener
         return this._needsRepaint;
     }
 
-    markRepainted(): void
-    {
-        this._needsRepaint = false;
-    }
-
     render(): void
     {
+        this._needsRepaint = false;
+
         if (!this.visible) return;
         this.rootWindow.render();
     }

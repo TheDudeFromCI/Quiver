@@ -70,7 +70,9 @@ export class Camera
 
     update(delta: number): void
     {
-        this._needsRepaint ||= this._posSmooth.distanceSquared(this.pos) > 0.01;
+        this._needsRepaint ||= this.canvas.width != this.canvas.clientWidth;
+        this._needsRepaint ||= this.canvas.height != this.canvas.clientHeight;
+        this._needsRepaint ||= this._posSmooth.distance(this.pos) > 0.01;
         this._needsRepaint ||= Math.abs(this._zoomSmooth - this.zoom) > 0.01;
 
         delta /= Theme.CAMERA_SMOOTHING;

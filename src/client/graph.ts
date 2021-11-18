@@ -4,6 +4,7 @@ import { ContextMenu } from "./contextmenu";
 import { InputHandler } from "./inputhandler";
 import { NodeHandler } from "./nodehandler";
 import { NodeSelection } from "./nodeselection";
+import { PlugSelection } from "./plugselection";
 
 export class Graph
 {
@@ -12,7 +13,8 @@ export class Graph
     public readonly cameraControls: CameraControls;
     public readonly background: Background;
     public readonly nodeHandler: NodeHandler;
-    public readonly selection: NodeSelection;
+    public readonly plugSelection: PlugSelection;
+    public readonly nodeSelection: NodeSelection;
     public readonly contextMenu: ContextMenu;
 
     constructor(canvas: HTMLCanvasElement)
@@ -22,14 +24,14 @@ export class Graph
         this.cameraControls = new CameraControls(this.camera, this.inputHandler);
         this.background = new Background(this.camera);
         this.nodeHandler = new NodeHandler(this.camera);
-        this.selection = new NodeSelection(this.inputHandler, this.nodeHandler);
+        this.plugSelection = new PlugSelection(this.camera, this.nodeHandler, this.inputHandler);
+        this.nodeSelection = new NodeSelection(this.inputHandler, this.nodeHandler);
         this.contextMenu = new ContextMenu(this.camera, this.inputHandler);
     }
 
     update(delta: number): void
     {
         this.camera.update(delta);
-        this.background.update();
     }
 
     render(): void
@@ -38,10 +40,9 @@ export class Graph
 
         this.background.render();
         this.nodeHandler.render();
-        this.selection.render(this.camera.ctx);
+        this.plugSelection.render();
+        this.nodeSelection.render(this.camera.ctx);
         this.contextMenu.render();
-
-        this.markRepainted();
     }
 
     private needsRepaint(): boolean
@@ -50,16 +51,9 @@ export class Graph
         needsRepaint ||= this.camera.needsRepaint;
         needsRepaint ||= this.background.needsRepaint;
         needsRepaint ||= this.nodeHandler.needsRepaint;
-        needsRepaint ||= this.selection.needsRepaint;
+        needsRepaint ||= this.plugSelection.needsRepaint;
+        needsRepaint ||= this.nodeSelection.needsRepaint;
         needsRepaint ||= this.contextMenu.needsRepaint;
         return needsRepaint;
-    }
-
-    private markRepainted(): void
-    {
-        this.camera.markRepainted();
-        this.background.markRepainted();
-        this.nodeHandler.markRepainted();
-        this.contextMenu.markRepainted();
     }
 }
