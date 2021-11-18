@@ -1,4 +1,5 @@
 import { Camera } from "./camera";
+import { MouseListener, InputHandler, MouseInfo } from "./inputhandler";
 import { Position } from "./position";
 import { Theme } from "./theme";
 
@@ -165,7 +166,7 @@ export class ContextWindow
     }
 }
 
-export class ContextMenu
+export class ContextMenu implements MouseListener
 {
     public readonly pos: Position = new Position();
 
@@ -174,9 +175,11 @@ export class ContextMenu
     private visible: boolean = false;
     private _needsRepaint: boolean = false;
 
-    constructor(camera: Camera)
+    constructor(camera: Camera, inputHandler: InputHandler)
     {
         this.camera = camera;
+
+        inputHandler.addListener(this);
 
         this.rootWindow = new ContextWindow('root', this.camera);
         this.rootWindow.offset.set(0, 0);
@@ -252,5 +255,31 @@ export class ContextMenu
     {
         if (!this.visible) return;
         this.rootWindow.selectOptionAt(mousePos, true);
+    }
+
+    mouseDown(mouse: MouseInfo): void
+    {
+        if (!this.isVisible) return;
+
+        if (!this.isInBounds(mouse.screenPos))
+        {
+            this.close();
+            return;
+        }
+
+        if (mouse.button === 0)
+            this.selectOptionAt(mouse.screenPos)
+    }
+
+    mouseMoved(mouse: MouseInfo): void
+    {
+        if (this.isVisible)
+            this.updateSelection(mouse.screenPos);
+    }
+
+    mouseUp(mouse: MouseInfo): void
+    {
+        if (!this.isVisible && mouse.button === 2)
+            this.openAt(mouse.pos);
     }
 }

@@ -1,4 +1,4 @@
-import { DragHandler, DragListener, MouseInfo } from "./draghandler";
+import { InputHandler, MouseListener, MouseInfo } from "./inputhandler";
 import { Bounds, Position } from "./position";
 import { Theme } from "./theme";
 
@@ -7,6 +7,13 @@ function lerp(a: number, b: number, t: number): number
     if (t <= 0) return a;
     if (t >= 1) return b;
     return a * (1 - t) + b * t;
+}
+
+function clamp(x: number, min: number, max: number): number
+{
+    if (x < min) return min;
+    if (x > max) return max;
+    return x;
 }
 
 export class Camera
@@ -103,20 +110,41 @@ export class Camera
     }
 }
 
-export class CameraControls implements DragListener
+export class CameraControls implements MouseListener
 {
     private readonly camera: Camera;
 
-    constructor(camera: Camera, dragHandler: DragHandler)
+    // Buffer
+    private readonly zoomTarget: Position = new Position();
+
+    constructor(camera: Camera, inputHandler: InputHandler)
     {
         this.camera = camera;
-        dragHandler.addListener(this);
+        inputHandler.addListener(this);
     }
 
-    dragUpdated(mouse: MouseInfo): void
+    mouseMoved(mouse: MouseInfo): void
     {
-        if (mouse.button !== 1) return;
+        if (mouse.button !== 1 || !mouse.mouseDown) return;
         this.camera.pos.x += mouse.deltaPos.x;
         this.camera.pos.y += mouse.deltaPos.y;
+    }
+
+    mouseWheel(mouse: MouseInfo): void
+    {
+        const delta = mouse.wheelDeltaY * Theme.MOUSE_WHEEL_WEIGHT;
+
+        let zoom: number;
+        if (delta < 0) zoom = Math.pow(Theme.ZOOM_DELTA, -delta);
+        else zoom = Math.pow(1 / Theme.ZOOM_DELTA, delta);
+
+        this.zoomTarget.set(mouse.pos.x, mouse.pos.y);
+        this.camera.worldToScreen(this.zoomTarget);
+
+        this.camera.zoom = clamp(this.camera.zoom * zoom, Theme.MAX_ZOOM_OUT, Theme.MAX_ZOOM_IN);
+
+        this.camera.screenToWorld(this.zoomTarget, true);
+        this.camera.pos.x += this.zoomTarget.x - mouse.pos.x;
+        this.camera.pos.y += this.zoomTarget.y - mouse.pos.y;
     }
 }

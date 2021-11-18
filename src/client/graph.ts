@@ -1,32 +1,29 @@
 import { Background } from "./background";
 import { Camera, CameraControls } from "./camera";
 import { ContextMenu } from "./contextmenu";
-import { DragHandler } from "./draghandler";
-import { Input } from "./input";
+import { InputHandler } from "./inputhandler";
 import { NodeHandler } from "./nodehandler";
 import { Selection } from "./selection";
 
 export class Graph
 {
     public readonly camera: Camera;
-    public readonly background: Background;
-    public readonly contextMenu: ContextMenu;
-    public readonly nodeHandler: NodeHandler;
-    public readonly dragHandler: DragHandler;
-    public readonly selection: Selection;
-    public readonly input: Input;
+    public readonly inputHandler: InputHandler;
     public readonly cameraControls: CameraControls;
+    public readonly background: Background;
+    public readonly nodeHandler: NodeHandler;
+    public readonly selection: Selection;
+    public readonly contextMenu: ContextMenu;
 
     constructor(canvas: HTMLCanvasElement)
     {
         this.camera = new Camera(canvas);
+        this.inputHandler = new InputHandler(this.camera);
+        this.cameraControls = new CameraControls(this.camera, this.inputHandler);
         this.background = new Background(this.camera);
-        this.contextMenu = new ContextMenu(this.camera);
         this.nodeHandler = new NodeHandler(this.camera);
-        this.dragHandler = new DragHandler(this.camera);
-        this.selection = new Selection(this.dragHandler, this.nodeHandler);
-        this.input = new Input(this.camera, this.contextMenu);
-        this.cameraControls = new CameraControls(this.camera, this.dragHandler);
+        this.selection = new Selection(this.inputHandler, this.nodeHandler);
+        this.contextMenu = new ContextMenu(this.camera, this.inputHandler);
     }
 
     update(delta: number): void

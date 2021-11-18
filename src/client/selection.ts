@@ -1,20 +1,20 @@
-import { DragHandler, DragListener, MouseInfo } from "./draghandler";
+import { InputHandler, MouseListener as MouseListener, MouseInfo } from "./inputhandler";
 import { GraphNode } from "./node";
 import { NodeHandler } from "./nodehandler";
 import { Bounds } from "./position";
 
-export class Selection implements DragListener
+export class Selection implements MouseListener
 {
     private readonly nodeHandler: NodeHandler;
     private selNodes: GraphNode[] = [];
     private selBounds?: Bounds;
     private _needsRepaint: boolean = false;
 
-    constructor(dragHandler: DragHandler, nodeHandler: NodeHandler)
+    constructor(inputHandler: InputHandler, nodeHandler: NodeHandler)
     {
         this.nodeHandler = nodeHandler;
 
-        dragHandler.addListener(this);
+        inputHandler.addListener(this);
     }
 
     get needsRepaint(): boolean
@@ -34,7 +34,7 @@ export class Selection implements DragListener
         ctx.stroke();
     }
 
-    dragStarted(mouse: MouseInfo): void
+    mouseDown(mouse: MouseInfo): void
     {
         if (mouse.button !== 0) return;
 
@@ -48,6 +48,7 @@ export class Selection implements DragListener
         }
         else if (!node.selected)
         {
+            for (let n of this.selNodes) n.selected = false;
             this.selNodes = [node];
             node.selected = true;
         }
@@ -55,9 +56,9 @@ export class Selection implements DragListener
         this._needsRepaint = true;
     }
 
-    dragUpdated(mouse: MouseInfo): void
+    mouseMoved(mouse: MouseInfo): void
     {
-        if (mouse.button !== 0) return;
+        if (mouse.button !== 0 || !mouse.mouseDown) return;
 
         if (this.selBounds == null)
         {
@@ -79,7 +80,7 @@ export class Selection implements DragListener
         }
     }
 
-    dragEnded(mouse: MouseInfo): void
+    mouseUp(mouse: MouseInfo): void
     {
         if (mouse.button !== 0) return;
 
