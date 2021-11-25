@@ -1,8 +1,8 @@
-import { Graph } from "./graph";
-import { Plug } from "./plug";
-import { NodeType } from "./nodetype";
-import { ContextMenuAction } from "./contextmenu";
-import { Position } from "./position";
+import { Graph } from "./graph/graph";
+import { Plug } from "./graph/plug";
+import { NodeType } from "./graph/nodetype";
+import { ContextMenuAction } from "./graph/contextmenu";
+import { Position } from "./graph/position";
 
 function main(): void
 {
