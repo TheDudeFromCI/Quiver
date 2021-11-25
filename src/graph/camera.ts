@@ -1,6 +1,6 @@
 import { InputHandler, MouseListener, MouseInfo } from "./inputhandler";
 import { Bounds, Position } from "./position";
-import { Theme } from "./theme";
+import { Theme } from "../rendering/theme";
 
 function lerp(a: number, b: number, t: number): number
 {

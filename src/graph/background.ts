@@ -1,6 +1,6 @@
 import { Camera } from "./camera";
 import { Bounds, Position } from "./position";
-import { Theme } from "./theme";
+import { Theme } from "../rendering/theme";
 
 export class Background
 {

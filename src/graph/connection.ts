@@ -1,7 +1,7 @@
 import { Camera } from "./camera";
 import { GraphNode } from "./node";
 import { Position } from "./position";
-import { Theme } from "./theme";
+import { Theme } from "../rendering/theme";
 
 export class Connection
 {

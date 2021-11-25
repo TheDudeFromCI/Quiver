@@ -3,7 +3,7 @@ import { InputHandler, MouseInfo, MouseListener } from "./inputhandler";
 import { GraphNode } from "./node";
 import { NodeHandler } from "./nodehandler";
 import { Position } from "./position";
-import { Theme } from "./theme";
+import { Theme } from "../rendering/theme";
 
 class SelectedPlug
 {

@@ -1,7 +1,7 @@
 import { Camera } from "./camera";
 import { MouseListener, InputHandler, MouseInfo } from "./inputhandler";
 import { Position } from "./position";
-import { Theme } from "./theme";
+import { Theme } from "../rendering/theme";
 
 export type ContextMenuAction = (mousePos: Position) => void;
 
