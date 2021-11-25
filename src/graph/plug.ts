@@ -1,11 +1,9 @@
-export class Plug
-{
-    public readonly name: string;
-    public readonly dataType: string;
+export class Plug {
+  public readonly name: string
+  public readonly dataType: string
 
-    constructor(name: string, dataType: string)
-    {
-        this.name = name;
-        this.dataType = dataType;
-    }
+  constructor (name: string, dataType: string) {
+    this.name = name
+    this.dataType = dataType
+  }
 }
