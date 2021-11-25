@@ -82,7 +82,6 @@ export class NodeSelection implements MouseListener {
   }
 
   keyDown (key: KeyInfo): void {
-    console.log(key.key)
     if (key.key !== 'Delete') return
 
     this.selNodes.forEach(n => this.nodeHandler.deleteNode(n))

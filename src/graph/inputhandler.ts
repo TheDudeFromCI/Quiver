@@ -45,8 +45,8 @@ export class InputHandler {
     canvas.addEventListener('mouseup', e => this.onMouseUp(e))
     canvas.addEventListener('wheel', e => this.onMouseWheel(e))
     canvas.addEventListener('contextmenu', e => this.onContextMenu(e))
-    canvas.addEventListener('keydown', e => this.onKeyDown(e))
-    canvas.addEventListener('keyup', e => this.onKeyUp(e))
+    document.addEventListener('keydown', e => this.onKeyDown(e))
+    document.addEventListener('keyup', e => this.onKeyUp(e))
   }
 
   private onMouseDown (e: MouseEvent): void {
@@ -115,9 +115,6 @@ export class InputHandler {
   }
 
   private onKeyDown (e: KeyboardEvent): void {
-    if (!document.hasFocus()) return
-    e.preventDefault()
-
     this.keyInfo.key = e.key
     this.keyInfo.metakey = e.metaKey
     this.keyInfo.shift = e.shiftKey
@@ -129,9 +126,6 @@ export class InputHandler {
   }
 
   private onKeyUp (e: KeyboardEvent): void {
-    if (!document.hasFocus()) return
-    e.preventDefault()
-
     this.keyInfo.key = e.key
     this.keyInfo.metakey = e.metaKey
     this.keyInfo.shift = e.shiftKey

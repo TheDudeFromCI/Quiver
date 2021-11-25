@@ -30,8 +30,6 @@ export class Camera {
     const ctx = canvas.getContext('2d')
     if (ctx == null) throw new Error('Canvas is not renderable!')
     else this.ctx = ctx
-
-    this.canvas.tabIndex = 1
   }
 
   get canvasWidth (): number {
