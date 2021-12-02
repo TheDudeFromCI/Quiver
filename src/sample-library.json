@@ -1,0 +1,68 @@
+{
+    "dataTypes": [
+        {
+            "name": "object",
+            "description": "A global wrapper for all data types.",
+            "parents": []
+        },
+        {
+            "name": "number",
+            "description": "Any real number.",
+            "parents": ["object"]
+        },
+        {
+            "name": "bool",
+            "description": "Can be either true or false.",
+            "parents": ["object"]
+        },
+        {
+            "name": "string",
+            "description": "Represents any text or array of characters.",
+            "parents": ["object"]
+        }
+    ],
+    "nodes": [
+        {
+            "name": "Add",
+            "namespace": "math",
+            "description": "Adds two numbers together.",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "number"
+                },
+                {
+                    "name": "B",
+                    "type": "number"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "A+B",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "Subtract",
+            "namespace": "math",
+            "description": "Subtracts one number from another number.",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "number"
+                },
+                {
+                    "name": "B",
+                    "type": "number"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "A-B",
+                    "type": "number"
+                }
+            ]
+        }
+    ]
+}

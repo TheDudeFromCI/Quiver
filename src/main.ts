@@ -1,8 +1,8 @@
 import { Graph } from './graph/graph'
-import { Plug } from './graph/plug'
-import { NodeType } from './graph/nodetype'
 import { ContextMenuAction } from './graph/contextmenu'
 import { Position } from './graph/position'
+import { Library, NodeType } from './graph/libraryhandler'
+import sampleLibrary from './sample-library.json'
 
 function main (): void {
   const canvas = document.getElementById('node-canvas') as HTMLCanvasElement
@@ -23,11 +23,11 @@ function main (): void {
     }
   }
 
-  const add = new NodeType('Add', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')])
-  const subtract = new NodeType('Subtract', [new Plug('A', 'number'), new Plug('B', 'number')], [new Plug('A+B', 'number')])
-
-  graph.contextMenu.addOption('math/add', addNode(add))
-  graph.contextMenu.addOption('math/subtract', addNode(subtract))
+  const library = Library.load(sampleLibrary)
+  for (const nodeType of library.nodeTypes) {
+    const path = nodeType.namespace + '/' + nodeType.namespace
+    graph.contextMenu.addOption(path, addNode(nodeType))
+  }
 
   let lastFrame = 0
   function mainLoop (time: number): void {

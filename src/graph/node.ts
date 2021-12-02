@@ -1,7 +1,7 @@
 import { Camera } from './camera'
-import { NodeType } from './nodetype'
 import { Position } from './position'
 import { Theme } from '../rendering/theme'
+import { NodeType } from './libraryhandler'
 
 function roundedRect (ctx: CanvasRenderingContext2D,
   x: number, y: number,

@@ -227,6 +227,6 @@ export class ContextMenu implements MouseListener {
   }
 
   mouseUp (mouse: MouseInfo): void {
-    if (!this.isVisible && mouse.button === 2) this.openAt(mouse.pos)
+    if (!this.isVisible && mouse.button === 2) this.openAt(mouse.screenPos)
   }
 }

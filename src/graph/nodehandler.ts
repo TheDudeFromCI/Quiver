@@ -1,7 +1,7 @@
 import { Camera } from './camera'
 import { Connection } from './connection'
 import { GraphNode } from './node'
-import { NodeType } from './nodetype'
+import { NodeType } from './libraryhandler'
 import { Bounds, Position } from './position'
 
 export class NodeHandler {
