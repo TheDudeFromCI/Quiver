@@ -30,7 +30,7 @@ void main() {
 export class GridBackground extends Model {
   constructor (engine: RenderingEngine) {
     const shader = engine.compileShader('background/grid', VERTEX_SHADER, FRAGMENT_SHADER)
-    const material = new Material(engine, shader)
+    const material = new Material(shader)
     const [attributes, indices] = createQuad()
     const mesh = engine.compileMesh('gridBackground_Quad', attributes, indices)
     super(material, mesh)

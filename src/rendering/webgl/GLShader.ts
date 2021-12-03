@@ -1,5 +1,4 @@
 import { mat4 } from 'gl-matrix'
-import { RenderingEngine } from '../api/RenderEngine'
 import { Shader } from '../api/Shader'
 import { WebGLError } from './WebGLRenderingEngine'
 
@@ -9,8 +8,8 @@ export class GLShader extends Shader {
   private readonly gl: WebGL2RenderingContext
   private readonly program: WebGLProgram
 
-  constructor (engine: RenderingEngine, name: string, vertexShader: string, fragmentShader: string, gl: WebGL2RenderingContext) {
-    super(engine, name, vertexShader, fragmentShader)
+  constructor (name: string, vertexShader: string, fragmentShader: string, gl: WebGL2RenderingContext) {
+    super(name, vertexShader, fragmentShader)
 
     this.gl = gl
     this.program = this.compileProgram()

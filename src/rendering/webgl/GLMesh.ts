@@ -1,5 +1,4 @@
 import { Mesh, VertexAttribute } from '../api/Mesh'
-import { RenderingEngine } from '../api/RenderEngine'
 import { GLShader } from './GLShader'
 import { WebGLError } from './WebGLRenderingEngine'
 
@@ -8,8 +7,8 @@ export class GLMesh extends Mesh {
   private readonly buffers: Record<string, WebGLBuffer> = {}
   private readonly vao: WebGLVertexArrayObject
 
-  constructor (engine: RenderingEngine, name: string, attributes: VertexAttribute[], indices: number[], gl: WebGL2RenderingContext) {
-    super(engine, name, attributes, indices)
+  constructor (name: string, attributes: VertexAttribute[], indices: number[], gl: WebGL2RenderingContext) {
+    super(name, attributes, indices)
 
     this.gl = gl
     this.vao = this.compileVAO()

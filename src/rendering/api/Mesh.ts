@@ -1,5 +1,3 @@
-import { RenderableElement } from './RenderableElement'
-import { RenderingEngine } from './RenderEngine'
 import { Shader } from './Shader'
 
 export class VertexAttribute {
@@ -14,7 +12,7 @@ export class VertexAttribute {
   }
 }
 
-export abstract class Mesh extends RenderableElement {
+export abstract class Mesh {
   private static activeMeshes: Record<string, Mesh> = {}
 
   public static find (name: string): Mesh {
@@ -32,8 +30,7 @@ export abstract class Mesh extends RenderableElement {
   private _disposed: boolean = false
   private targetShader: string | null = null
 
-  constructor (engine: RenderingEngine, name: string, attributes: VertexAttribute[], indices: number[]) {
-    super(engine)
+  constructor (name: string, attributes: VertexAttribute[], indices: number[]) {
     if (Mesh.activeMeshes[name] !== undefined) throw new MeshError('There is already a mesh with the given name!')
 
     this.name = name

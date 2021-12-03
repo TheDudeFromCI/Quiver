@@ -16,7 +16,7 @@ export class WebGLRenderingEngine extends RenderingEngine {
     if (gl == null) throw new WebGLError('Failed to initialize WebGL!')
     this.gl = gl
 
-    this.scene = new GLScene(this, gl)
+    this.scene = new GLScene(gl)
     this.markDirty()
   }
 
@@ -25,11 +25,11 @@ export class WebGLRenderingEngine extends RenderingEngine {
   }
 
   compileShader (name: string, vertexShader: string, fragmentShader: string): Shader {
-    return new GLShader(this, name, vertexShader, fragmentShader, this.gl)
+    return new GLShader(name, vertexShader, fragmentShader, this.gl)
   }
 
   compileMesh (name: string, attributes: VertexAttribute[], indices: number[]): Mesh {
-    return new GLMesh(this, name, attributes, indices, this.gl)
+    return new GLMesh(name, attributes, indices, this.gl)
   }
 }
 

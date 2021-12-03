@@ -1,11 +1,10 @@
-import { RenderingEngine } from '../api/RenderEngine'
 import { Scene } from '../api/Scene'
 
 export class GLScene extends Scene {
   private readonly gl: WebGL2RenderingContext
 
-  constructor (engine: RenderingEngine, gl: WebGL2RenderingContext) {
-    super(engine)
+  constructor (gl: WebGL2RenderingContext) {
+    super()
     this.gl = gl
   }
 

@@ -1,8 +1,6 @@
 import { mat4 } from 'gl-matrix'
-import { RenderableElement } from './RenderableElement'
-import { RenderingEngine } from './RenderEngine'
 
-export abstract class Shader extends RenderableElement {
+export abstract class Shader {
   private static activeShaders: Record<string, Shader> = {}
   private static boundShader: string | null = null
 
@@ -19,8 +17,7 @@ export abstract class Shader extends RenderableElement {
   public readonly fragmentShader: string
   private _disposed: boolean = false
 
-  constructor (engine: RenderingEngine, name: string, vertexShader: string, fragmentShader: string) {
-    super(engine)
+  constructor (name: string, vertexShader: string, fragmentShader: string) {
     if (Shader.activeShaders[name] !== undefined) throw new ShaderError('There is already a shader with the given name!')
 
     this.name = name
@@ -64,7 +61,6 @@ export abstract class Shader extends RenderableElement {
   setMatrix (name: string, data: mat4): void {
     if (this.disposed) throw new ShaderError('Shader already disposed!')
     this.setMatrixInner(name, data)
-    this.markDirty()
   }
 
   protected abstract bindInner (): void
