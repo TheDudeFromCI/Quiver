@@ -1,5 +1,5 @@
-import { RenderingEngine } from '../RenderEngine'
-import { Scene } from '../Scene'
+import { RenderingEngine } from '../api/RenderEngine'
+import { Scene } from '../api/Scene'
 
 export class GLScene extends Scene {
   private readonly gl: WebGL2RenderingContext

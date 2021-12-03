@@ -1,6 +1,6 @@
 import { mat4 } from 'gl-matrix'
-import { RenderingEngine } from '../RenderEngine'
-import { Shader } from '../Shader'
+import { RenderingEngine } from '../api/RenderEngine'
+import { Shader } from '../api/Shader'
 import { WebGLError } from './WebGLRenderingEngine'
 
 export class GLShader extends Shader {

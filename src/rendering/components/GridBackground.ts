@@ -1,7 +1,7 @@
-import { Material } from '../Material'
-import { createQuad } from '../MeshPrimatives'
-import { Model } from '../Model'
-import { RenderingEngine } from '../RenderEngine'
+import { Material } from '../api/Material'
+import { createQuad } from '../utils/MeshPrimatives'
+import { Model } from '../api/Model'
+import { RenderingEngine } from '../api/RenderEngine'
 
 const VERTEX_SHADER = `#version 300 es
 precision highp float;

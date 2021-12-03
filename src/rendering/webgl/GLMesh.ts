@@ -1,5 +1,5 @@
-import { Mesh, VertexAttribute } from '../Mesh'
-import { RenderingEngine } from '../RenderEngine'
+import { Mesh, VertexAttribute } from '../api/Mesh'
+import { RenderingEngine } from '../api/RenderEngine'
 import { GLShader } from './GLShader'
 import { WebGLError } from './WebGLRenderingEngine'
 

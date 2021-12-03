@@ -1,4 +1,4 @@
-import { VertexAttribute } from './Mesh'
+import { VertexAttribute } from '../api/Mesh'
 
 export type MeshData = [attributes: VertexAttribute[], indices: number[]]
 
