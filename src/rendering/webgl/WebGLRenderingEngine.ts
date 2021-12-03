@@ -1,12 +1,12 @@
 import { VertexAttribute, Mesh } from '../api/Mesh'
 import { RenderingEngine } from '../api/RenderEngine'
+import { Scene } from '../api/Scene'
 import { Shader } from '../api/Shader'
 import { GLMesh } from './GLMesh'
 import { GLScene } from './GLScene'
 import { GLShader } from './GLShader'
 
 export class WebGLRenderingEngine extends RenderingEngine {
-  public readonly scene: GLScene
   private readonly gl: WebGL2RenderingContext
 
   constructor (canvas: HTMLCanvasElement) {
@@ -16,12 +16,7 @@ export class WebGLRenderingEngine extends RenderingEngine {
     if (gl == null) throw new WebGLError('Failed to initialize WebGL!')
     this.gl = gl
 
-    this.scene = new GLScene(gl)
     this.markDirty()
-  }
-
-  protected drawScene (): void {
-    this.scene.render()
   }
 
   compileShader (name: string, vertexShader: string, fragmentShader: string): Shader {
@@ -30,6 +25,10 @@ export class WebGLRenderingEngine extends RenderingEngine {
 
   compileMesh (name: string, attributes: VertexAttribute[], indices: number[]): Mesh {
     return new GLMesh(name, attributes, indices, this.gl)
+  }
+
+  createScene (): Scene {
+    return new GLScene(this.gl)
   }
 }
 

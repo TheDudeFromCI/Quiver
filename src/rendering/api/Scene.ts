@@ -1,17 +1,19 @@
+import { Camera } from './Camera'
 import { Color } from './Color'
 import { Model } from './Model'
 
 export abstract class Scene {
+  public readonly clearColor: Color = new Color(0, 0, 0, 1)
+  public readonly camera: Camera = new Camera()
   private readonly models: Model[] = []
-  public readonly clearColor: Color
 
-  constructor () {
-    this.clearColor = new Color(0, 0, 0, 1)
+  update (): void {
+    for (const model of this.models) model.update()
   }
 
   render (): void {
     this.clearScreen()
-    for (const model of this.models) model.render()
+    for (const model of this.models) model.render(this.camera)
   }
 
   addModel (model: Model): void {

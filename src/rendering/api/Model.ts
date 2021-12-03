@@ -1,7 +1,10 @@
+import { mat4 } from 'gl-matrix'
+import { Camera } from './Camera'
 import { Material } from './Material'
 import { Mesh } from './Mesh'
 
 export class Model {
+  private readonly modelMatrix: mat4 = mat4.create()
   private readonly material: Material
   private readonly mesh: Mesh
 
@@ -10,8 +13,12 @@ export class Model {
     this.mesh = mesh
   }
 
-  render (): void {
-    this.material.bind()
+  update (): void {
+    // Pass
+  }
+
+  render (camera: Camera): void {
+    this.material.bind(camera, this.modelMatrix)
     this.mesh.linkToShader(this.material.shader)
     this.mesh.render()
   }
