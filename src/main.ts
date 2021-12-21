@@ -1,49 +1,25 @@
 
-import { GridBackground } from './rendering/components/GridBackground'
-import { WebGLRenderingEngine } from './rendering/webgl/WebGLRenderingEngine'
+import { Graph } from './rendering/graph/Graph'
 
 function main (): void {
   const canvas = document.getElementById('node-canvas') as HTMLCanvasElement
   if (canvas == null) throw new Error('Failed to find canvas element!')
 
-  const renderingEngine = new WebGLRenderingEngine(canvas)
-  renderingEngine.scene.addModel(new GridBackground(renderingEngine))
-  renderingEngine.markDirty()
+  const graph = new Graph(canvas)
 
-  // const graph = new Graph(canvas)
+  let lastFrame = 0
+  function mainLoop (time: number): void {
+    requestAnimationFrame(mainLoop)
 
-  // // @ts-expect-error
-  // globalThis.graph = graph
+    const delta = (time - lastFrame) / 1000.0
+    if (delta < 1 / 60) return // Limit to 60 fps
+    lastFrame = time
 
-  // function addNode (type: NodeType): ContextMenuAction {
-  //   return (mousePos: Position) => {
-  //     const n = graph.nodeHandler.addNode(type)
-  //     n.pos.set(mousePos.x, mousePos.y)
-  //     graph.camera.screenToWorld(n.pos)
-  //     n.pos.x -= n.width / 2
-  //     n.pos.y -= n.height / 2
-  //   }
-  // }
+    graph.update(delta)
+    graph.render()
+  }
 
-  // const library = Library.load(sampleLibrary)
-  // for (const nodeType of library.nodeTypes) {
-  //   const path = nodeType.namespace + '/' + nodeType.namespace
-  //   graph.contextMenu.addOption(path, addNode(nodeType))
-  // }
-
-  // let lastFrame = 0
-  // function mainLoop (time: number): void {
-  //   requestAnimationFrame(mainLoop)
-
-  //   const delta = (time - lastFrame) / 1000.0
-  //   if (delta < 1 / 60) return // Limit to 60 fps
-  //   lastFrame = time
-
-  //   graph.update(delta)
-  //   graph.render()
-  // }
-
-  // requestAnimationFrame(mainLoop)
+  requestAnimationFrame(mainLoop)
 }
 
 window.addEventListener('DOMContentLoaded', main)
