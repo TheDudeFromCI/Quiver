@@ -1,5 +1,5 @@
 
-import { Graph } from './rendering/graph/Graph'
+import { Graph } from './rendering/Graph'
 
 function main (): void {
   const canvas = document.getElementById('node-canvas') as HTMLCanvasElement

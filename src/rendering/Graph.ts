@@ -1,5 +1,5 @@
 import { Scene, OrthographicCamera, WebGLRenderer, Object3D } from 'three'
-import GridBackground from '../components/GridBackground'
+import GridBackground from './GridBackground'
 
 export class Graph {
   private readonly canvas: HTMLCanvasElement
