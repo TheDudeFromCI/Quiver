@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "projects": {
+    "quiver-graph-logic": "packages/quiver-graph-logic"
+  }
+}

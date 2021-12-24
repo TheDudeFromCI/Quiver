@@ -1,0 +1,78 @@
+{
+  "name": "quiver",
+  "version": "1.0.0",
+  "description": "A webapp for designing node graphs based on the Vertex library.",
+  "main": "public/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "build": "ts-standard && tsc && browserify build/main.js --outfile public/quiver.js",
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "lint": "ts-standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDudeFromCI/Quiver.git"
+  },
+  "keywords": [
+    "node",
+    "graph",
+    "web",
+    "webapp",
+    "server"
+  ],
+  "author": "TheDudeFromCI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDudeFromCI/Quiver/issues"
+  },
+  "homepage": "https://github.com/TheDudeFromCI/Quiver#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "@types/jquery": "^3.5.8",
+    "@types/node": "^16.11.7",
+    "@types/three": "^0.135.0",
+    "browserify": "^17.0.0",
+    "electron": "^16.0.0",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "gl-matrix": "^3.4.3",
+    "three.js": "^0.77.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "quiver"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

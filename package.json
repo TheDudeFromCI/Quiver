@@ -1,78 +1,29 @@
 {
   "name": "quiver",
-  "version": "1.0.0",
-  "description": "A webapp for designing node graphs based on the Vertex library.",
-  "main": "public/app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc",
-    "build": "ts-standard && tsc && browserify build/main.js --outfile public/quiver.js",
-    "start": "electron .",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "lint": "ts-standard --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TheDudeFromCI/Quiver.git"
-  },
-  "keywords": [
-    "node",
-    "graph",
-    "web",
-    "webapp",
-    "server"
-  ],
-  "author": "TheDudeFromCI",
+  "version": "0.0.0",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TheDudeFromCI/Quiver/issues"
-  },
-  "homepage": "https://github.com/TheDudeFromCI/Quiver#readme",
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.61",
-    "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "@types/jquery": "^3.5.8",
-    "@types/node": "^16.11.7",
-    "@types/three": "^0.135.0",
-    "browserify": "^17.0.0",
-    "electron": "^16.0.0",
-    "ts-standard": "^11.0.0",
-    "typescript": "^4.4.4"
-  },
+  "scripts": {},
+  "private": true,
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
-    "gl-matrix": "^3.4.3",
-    "three.js": "^0.77.1"
+    "tslib": "^2.0.0"
   },
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "quiver"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+  "devDependencies": {
+    "@nrwl/cli": "13.4.1",
+    "@nrwl/eslint-plugin-nx": "13.4.1",
+    "@nrwl/jest": "13.4.1",
+    "@nrwl/js": "13.4.1",
+    "@nrwl/linter": "13.4.1",
+    "@nrwl/tao": "13.4.1",
+    "@nrwl/workspace": "13.4.1",
+    "@types/jest": "27.0.2",
+    "@types/node": "14.14.33",
+    "@typescript-eslint/eslint-plugin": "~5.3.0",
+    "@typescript-eslint/parser": "~5.3.0",
+    "eslint": "8.2.0",
+    "eslint-config-prettier": "8.1.0",
+    "jest": "27.2.3",
+    "prettier": "^2.3.1",
+    "ts-jest": "27.0.5",
+    "typescript": "~4.4.3"
   }
 }
