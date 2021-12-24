@@ -2,28 +2,33 @@ import { Scene, OrthographicCamera, WebGLRenderer, Object3D } from 'three'
 import GridBackground from './GridBackground'
 
 export class Graph {
+  public static readonly GRID_SIZE = 50
+
   private readonly canvas: HTMLCanvasElement
   private readonly scene: Scene
-  private readonly camera: OrthographicCamera
   private readonly renderer: WebGLRenderer
   private readonly background: GridBackground
+
+  public readonly camera: OrthographicCamera
 
   constructor (canvas: HTMLCanvasElement) {
     this.scene = new Scene()
     this.canvas = canvas
-    this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1)
-    this.renderer = new WebGLRenderer({ canvas: this.canvas, antialias: true })
+    this.camera = new OrthographicCamera(-10, 10, 10, -10, 1, 10)
+    this.renderer = new WebGLRenderer({ canvas: this.canvas, depth: false })
     this.background = new GridBackground()
     this.addComponent(this.background)
 
+    this.camera.translateZ(5)
+    this.renderer.autoClear = false
     this.updateCanvasSize()
   }
 
   private updateCanvasSize (): void {
     this.canvas.width = this.canvas.clientWidth
     this.canvas.height = this.canvas.clientHeight
-    this.camera.right = this.canvas.clientWidth
-    this.camera.top = this.canvas.clientHeight
+    this.camera.right = this.canvas.width / Graph.GRID_SIZE
+    this.camera.top = this.canvas.height / Graph.GRID_SIZE
     this.camera.left = 0
     this.camera.bottom = 0
     this.camera.updateProjectionMatrix()
@@ -43,6 +48,8 @@ export class Graph {
   }
 
   render (): void {
+    const pos = this.camera.position
+    this.background.setCameraPos(pos.x, pos.y)
     this.renderer.render(this.scene, this.camera)
   }
 }

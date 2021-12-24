@@ -1,4 +1,3 @@
-
 import { Graph } from './rendering/Graph'
 
 function main (): void {
