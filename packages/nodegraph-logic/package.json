@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "tsc",
     "lint": "ts-standard",
-    "lint-fix": "ts-standard --fix"
+    "fix-lint": "ts-standard --fix"
   },
   "repository": {
     "type": "git",
@@ -36,5 +36,8 @@
     "dist/index.js",
     "dist/index.d.ts",
     "dist/lib"
-  ]
+  ],
+  "ts-standard": {
+    "ignore": "dist"
+  }
 }

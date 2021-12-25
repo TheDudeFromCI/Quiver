@@ -2,8 +2,7 @@ import { Node } from '../api/Node'
 import { Graph } from '../Graph'
 
 export class NodeImpl implements Node {
-  public readonly graph: Graph
-
+  private readonly _graph: Graph
   private _name = ''
   private _x = 0
   private _y = 0
@@ -17,32 +16,36 @@ export class NodeImpl implements Node {
    * @memberof NodeImpl
    */
   constructor (graph: Graph, name: string) {
-    this.graph = graph
+    this._graph = graph
     this.rename(name)
   }
 
-  get x (): number {
+  x (): number {
     return this._x
   }
 
-  get y (): number {
+  y (): number {
     return this._y
   }
 
-  get width (): number {
+  width (): number {
     return this._width
   }
 
-  get height (): number {
+  height (): number {
     return this._height
   }
 
-  get name (): string {
+  name (): string {
     return this._name
   }
 
+  graph (): Graph {
+    return this._graph
+  }
+
   rename (name: string): void {
-    if (this.graph.findNode(name) != null) {
+    if (this._graph.findNode(name) != null) {
       throw new Error(`There is already a node with the name '${name}'!`)
     }
 

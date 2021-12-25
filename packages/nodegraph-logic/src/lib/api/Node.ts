@@ -14,33 +14,33 @@ export interface Node {
   /**
    * @returns The x location of the node in world units.
    */
-  get x (): number
+  x: () => number
 
   /**
    * @returns The y location of the node in world units.
    */
-  get y (): number
+  y: () => number
 
   /**
    * @returns The width of the node in world units.
    */
-  get width (): number
+  width: () => number
 
   /**
    * @returns The height of the node in world units.
    */
-  get height (): number
+  height: () => number
 
   /**
    * @returns The name of this node. This is used as the unquie identifier of the
    * node within a graph.
    */
-  get name (): string
+  name: () => string
 
   /**
    * @returns The graph that this node is part of.
    */
-  get graph (): Graph
+  graph: () => Graph
 
   /**
    * Renames this node to a new identifier.
