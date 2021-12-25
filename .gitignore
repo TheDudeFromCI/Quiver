@@ -103,6 +103,4 @@ dist
 # TernJS port file
 .tern-port
 
-build
-out
-public/quiver.js
+packages/*/dist

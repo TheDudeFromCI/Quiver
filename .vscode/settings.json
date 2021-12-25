@@ -6,7 +6,10 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "node_modules": true,
-        "package-lock.json": true
+        "**/node_modules": true,
+        "package-lock.json": true,
+        "packages/*/dist": true,
+        "packages/*/coverage": true,
+        "**/*.tsbuildinfo": true
     }
 }

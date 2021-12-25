@@ -1,0 +1,40 @@
+{
+  "name": "nodegraph-logic",
+  "version": "0.1.0",
+  "description": "A small library for working with NodeGraph logic.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "lint": "ts-standard",
+    "lint-fix": "ts-standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDudeFromCI/Quiver.git"
+  },
+  "keywords": [
+    "node",
+    "graph"
+  ],
+  "author": "TheDudeFromCI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDudeFromCI/Quiver/issues"
+  },
+  "homepage": "https://github.com/TheDudeFromCI/Quiver#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.5",
+    "ts-node": "^10.4.0",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.4.3"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/lib"
+  ]
+}
