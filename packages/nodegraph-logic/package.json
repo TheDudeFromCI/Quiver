@@ -7,7 +7,8 @@
     "test": "jest",
     "build": "tsc",
     "lint": "ts-standard && eslint -f unix \"src/**/*.{ts,tsx}\"",
-    "fix-lint": "ts-standard --fix"
+    "fix-lint": "ts-standard --fix",
+    "docs": "typedoc --out docs src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -32,9 +33,11 @@
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
     "jest": "^27.4.5",
     "ts-node": "^10.4.0",
     "ts-standard": "^11.0.0",
+    "typedoc-plugin-markdown": "^3.11.8",
     "typescript": "^4.4.3"
   },
   "files": [

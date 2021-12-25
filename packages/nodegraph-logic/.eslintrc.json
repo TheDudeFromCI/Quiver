@@ -5,7 +5,7 @@
         "jest": true
     },
     "extends": [
-        "eslint:recommended"
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -14,7 +14,8 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "jest"
+        "jest",
+        "eslint-plugin-tsdoc"
     ],
     "rules": {
         "@typescript-eslint/no-unused-vars": "warn",

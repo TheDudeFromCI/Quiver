@@ -45,7 +45,7 @@ export interface Node {
   /**
    * Renames this node to a new identifier.
    * @param name - The new name for this node.
-   * @throws {@link IdentifierError} If there is already an existing node in
+   * @throws {@link nodegraph-logic#IdentifierError} If there is already an existing node in
    * graph this this name.
    */
   rename: (name: string) => void
