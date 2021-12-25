@@ -14,7 +14,7 @@ export class Graph {
 
   findNode (name: string): Node | null {
     for (const node of this.nodes) {
-      if (node.name === name) return node
+      if (node.name() === name) return node
     }
 
     return null
