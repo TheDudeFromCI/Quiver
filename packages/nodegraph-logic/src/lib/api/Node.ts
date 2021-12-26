@@ -1,5 +1,5 @@
 import { IdentifierError, InvalidArgumentError } from '../Errors'
-import { Result } from 'ts-results';
+import { Result } from 'ts-results'
 import { Graph } from '../Graph'
 
 /**
@@ -25,7 +25,7 @@ export interface Node {
    * @returns The x location.
    * @see {@link y}
    */
-  x(): number
+  x: () => number
 
   /**
    * Gets the y location of the node in world units.
@@ -37,7 +37,7 @@ export interface Node {
    * @returns The y location.
    * @see {@link x}
    */
-   y(): number
+  y: () => number
 
   /**
    * Gets the width of the node in world units.
@@ -45,7 +45,7 @@ export interface Node {
    * @returns The width.
    * @see {@link height}
    */
-   width(): number
+  width: () => number
 
   /**
    * Gets the height of the node in world units.
@@ -53,7 +53,7 @@ export interface Node {
    * @returns The height.
    * @see {@link width}
    */
-   height(): number
+  height: () => number
 
   /**
    * Gets the name of this node.
@@ -66,14 +66,14 @@ export interface Node {
    *
    * @returns The name.
    */
-  name(): string
+  name: () => string
 
   /**
    * Gets graph that this node is part of.
    *
    * @returns The graph.
    */
-  graph(): Graph
+  graph: () => Graph
 
   /**
    * Renames this node to a new identifier.

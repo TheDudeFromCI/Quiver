@@ -33,7 +33,7 @@ export class Graph {
    * @returns The newly created node, or an {@link IdentifierError} if there is
    *          already a node with the given name.
    */
-  addNode (name: string, x: number, y: number): Result<Node,IdentifierError> {
+  addNode (name: string, x: number, y: number): Result<Node, IdentifierError> {
     const nodeResult = NodeImpl.new(this, name)
     if (nodeResult.err) {
       return Err(nodeResult.val)

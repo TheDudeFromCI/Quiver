@@ -27,7 +27,7 @@ export class NodeImpl implements Node {
    *          - {@link Result}<{@link IdentifierError}> If there is already
    *            a node in the graph with the given name.
    */
-   static new (graph: Graph, name: string): Result<NodeImpl, IdentifierError> {
+  static new (graph: Graph, name: string): Result<NodeImpl, IdentifierError> {
     const node = new NodeImpl(graph)
 
     const result = node.rename(name)
@@ -57,42 +57,42 @@ export class NodeImpl implements Node {
   /**
    * {@inheritdoc}
    */
-   y (): number {
+  y (): number {
     return this._y
   }
 
   /**
    * {@inheritdoc}
    */
-   width (): number {
+  width (): number {
     return this._width
   }
 
   /**
    * {@inheritdoc}
    */
-   height (): number {
+  height (): number {
     return this._height
   }
 
   /**
    * {@inheritdoc}
    */
-   name (): string {
+  name (): string {
     return this._name
   }
 
   /**
    * {@inheritdoc}
    */
-   graph (): Graph {
+  graph (): Graph {
     return this._graph
   }
 
   /**
    * {@inheritdoc}
    */
-   rename (name: string): Result<void, IdentifierError> {
+  rename (name: string): Result<void, IdentifierError> {
     if (this._graph.findNode(name).some) {
       return Err(new IdentifierError(`There is already a node with the name '${name}'!`))
     }
@@ -104,7 +104,7 @@ export class NodeImpl implements Node {
   /**
    * {@inheritdoc}
    */
-   moveTo (x: number, y: number): void {
+  moveTo (x: number, y: number): void {
     this._x = x
     this._y = y
   }
@@ -112,7 +112,7 @@ export class NodeImpl implements Node {
   /**
    * {@inheritdoc}
    */
-   setSize (width: number, height: number): Result<void, InvalidArgumentError> {
+  setSize (width: number, height: number): Result<void, InvalidArgumentError> {
     if (width < 1 || height < 1) {
       return Err(new InvalidArgumentError('Width and height cannot be less than 1 unit!'))
     }
