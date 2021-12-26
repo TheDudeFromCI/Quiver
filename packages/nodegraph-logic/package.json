@@ -47,5 +47,8 @@
   ],
   "ts-standard": {
     "ignore": "dist"
+  },
+  "dependencies": {
+    "ts-results": "^3.3.0"
   }
 }

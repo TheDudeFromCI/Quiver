@@ -8,6 +8,7 @@
 
 - [Graph](classes/Graph.md)
 - [IdentifierError](classes/IdentifierError.md)
+- [InvalidArgumentError](classes/InvalidArgumentError.md)
 
 ### Interfaces
 
