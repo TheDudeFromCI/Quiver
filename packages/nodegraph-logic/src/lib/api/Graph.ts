@@ -1,7 +1,6 @@
-import { NodeImpl } from './NodeImpl'
-import { Node } from './api/Node'
-import { Err, None, Ok, Option, Result, Some } from 'ts-results'
-import { IdentifierError } from '..'
+import { Node } from './Node'
+import { Option, Result } from 'ts-results'
+import { IdentifierError } from './Errors'
 
 /**
  * A container for a set of function nodes to show relationships.
@@ -20,9 +19,7 @@ import { IdentifierError } from '..'
  *
  * @public
  */
-export class Graph {
-  private readonly nodes: Node[] = []
-
+export interface Graph {
   /**
    * Creates a new node within this graph.
    *
@@ -33,18 +30,7 @@ export class Graph {
    * @returns The newly created node, or an {@link IdentifierError} if there is
    *          already a node with the given name.
    */
-  addNode (name: string, x: number, y: number): Result<Node, IdentifierError> {
-    const nodeResult = NodeImpl.new(this, name)
-    if (nodeResult.err) {
-      return Err(nodeResult.val)
-    }
-
-    const node = nodeResult.unwrap()
-    node.moveTo(x, y)
-
-    this.nodes.push(node)
-    return Ok(node)
-  }
+  addNode: (name: string, x: number, y: number) => Result<Node, IdentifierError>
 
   /**
    * Finds a node in this graph with the given name.
@@ -57,11 +43,5 @@ export class Graph {
    * @returns The node with the given name, or null if there is no node with
    *          that name.
    */
-  findNode (name: string): Option<Node> {
-    for (const node of this.nodes) {
-      if (node.name() === name) return Some(node)
-    }
-
-    return None
-  }
+  findNode: (name: string) => Option<Node>
 }

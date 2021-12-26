@@ -28,19 +28,19 @@ data and modifies it to produce some output data.
 
 ### graph
 
-▸ **graph**(): [`Graph`](../classes/Graph.md)
+▸ **graph**(): [`Graph`](Graph.md)
 
 Gets graph that this node is part of.
 
 #### Returns
 
-[`Graph`](../classes/Graph.md)
+[`Graph`](Graph.md)
 
 The graph.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:76](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L76)
+[packages/nodegraph-logic/src/lib/api/Node.ts:75](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L75)
 
 ___
 
@@ -60,7 +60,7 @@ The height.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:56](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L56)
+[packages/nodegraph-logic/src/lib/api/Node.ts:55](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L55)
 
 ___
 
@@ -89,7 +89,7 @@ Moves this node to a new loction in the graph.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:97](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L97)
+[packages/nodegraph-logic/src/lib/api/Node.ts:96](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L96)
 
 ___
 
@@ -103,7 +103,7 @@ Gets the name of this node.
 This is used as the unquie identifier of the node within a graph. No two
 nodes within a graph may have the same name. The only exception to this
 rule is nodes within nested functions, which are considered to be part
-of their own graph.
+of a seperate graph.
 
 #### Returns
 
@@ -113,7 +113,7 @@ The name.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:69](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L69)
+[packages/nodegraph-logic/src/lib/api/Node.ts:68](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L68)
 
 ___
 
@@ -140,7 +140,7 @@ An [IdentifierError](../classes/IdentifierError.md) if there is already an exist
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:87](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L87)
+[packages/nodegraph-logic/src/lib/api/Node.ts:86](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L86)
 
 ___
 
@@ -168,7 +168,7 @@ An [InvalidArgumentError](../classes/InvalidArgumentError.md) if the width or he
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:109](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L109)
+[packages/nodegraph-logic/src/lib/api/Node.ts:108](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L108)
 
 ___
 
@@ -188,7 +188,7 @@ The width.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:48](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L48)
+[packages/nodegraph-logic/src/lib/api/Node.ts:47](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L47)
 
 ___
 
@@ -212,7 +212,7 @@ The x location.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:28](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L28)
+[packages/nodegraph-logic/src/lib/api/Node.ts:27](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L27)
 
 ___
 
@@ -236,4 +236,4 @@ The y location.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/api/Node.ts:40](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/api/Node.ts#L40)
+[packages/nodegraph-logic/src/lib/api/Node.ts:39](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Node.ts#L39)

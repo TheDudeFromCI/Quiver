@@ -1,6 +1,6 @@
 [nodegraph-logic](../README.md) / [Exports](../modules.md) / Graph
 
-# Class: Graph
+# Interface: Graph
 
 A container for a set of function nodes to show relationships.
 
@@ -18,40 +18,16 @@ A graph may not contain circular depdencies between nodes.
 
 ## Table of contents
 
-### Constructors
-
-- [constructor](Graph.md#constructor)
-
-### Properties
-
-- [nodes](Graph.md#nodes)
-
 ### Methods
 
 - [addNode](Graph.md#addnode)
 - [findNode](Graph.md#findnode)
 
-## Constructors
-
-### constructor
-
-• **new Graph**()
-
-## Properties
-
-### nodes
-
-• `Private` `Readonly` **nodes**: [`Node`](../interfaces/Node.md)[] = `[]`
-
-#### Defined in
-
-[packages/nodegraph-logic/src/lib/Graph.ts:24](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/Graph.ts#L24)
-
 ## Methods
 
 ### addNode
 
-▸ **addNode**(`name`, `x`, `y`): `Result`<[`Node`](../interfaces/Node.md), [`IdentifierError`](IdentifierError.md)\>
+▸ **addNode**(`name`, `x`, `y`): `Result`<[`Node`](Node.md), [`IdentifierError`](../classes/IdentifierError.md)\>
 
 Creates a new node within this graph.
 
@@ -65,20 +41,20 @@ Creates a new node within this graph.
 
 #### Returns
 
-`Result`<[`Node`](../interfaces/Node.md), [`IdentifierError`](IdentifierError.md)\>
+`Result`<[`Node`](Node.md), [`IdentifierError`](../classes/IdentifierError.md)\>
 
-The newly created node, or an [IdentifierError](IdentifierError.md) if there is
+The newly created node, or an [IdentifierError](../classes/IdentifierError.md) if there is
          already a node with the given name.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/Graph.ts:36](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/Graph.ts#L36)
+[packages/nodegraph-logic/src/lib/api/Graph.ts:33](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Graph.ts#L33)
 
 ___
 
 ### findNode
 
-▸ **findNode**(`name`): `Option`<[`Node`](../interfaces/Node.md)\>
+▸ **findNode**(`name`): `Option`<[`Node`](Node.md)\>
 
 Finds a node in this graph with the given name.
 
@@ -94,11 +70,11 @@ This function is case sensitive.
 
 #### Returns
 
-`Option`<[`Node`](../interfaces/Node.md)\>
+`Option`<[`Node`](Node.md)\>
 
 The node with the given name, or null if there is no node with
          that name.
 
 #### Defined in
 
-[packages/nodegraph-logic/src/lib/Graph.ts:60](https://github.com/TheDudeFromCI/Quiver/blob/22115ed/packages/nodegraph-logic/src/lib/Graph.ts#L60)
+[packages/nodegraph-logic/src/lib/api/Graph.ts:46](https://github.com/TheDudeFromCI/Quiver/blob/1737dba/packages/nodegraph-logic/src/lib/api/Graph.ts#L46)

@@ -1,6 +1,6 @@
-import { IdentifierError, InvalidArgumentError } from '../Errors'
+import { IdentifierError, InvalidArgumentError } from './Errors'
 import { Result } from 'ts-results'
-import { Graph } from '../Graph'
+import { Graph } from './Graph'
 
 /**
  * An executable function within a Node Graph.
@@ -14,7 +14,6 @@ import { Graph } from '../Graph'
  * @public
  */
 export interface Node {
-
   /**
    * Gets the x location of the node in world units.
    *
@@ -62,7 +61,7 @@ export interface Node {
    * This is used as the unquie identifier of the node within a graph. No two
    * nodes within a graph may have the same name. The only exception to this
    * rule is nodes within nested functions, which are considered to be part
-   * of their own graph.
+   * of a seperate graph.
    *
    * @returns The name.
    */

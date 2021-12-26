@@ -1,7 +1,7 @@
 import { Err, Ok, Result } from 'ts-results'
 import { Node } from './api/Node'
-import { IdentifierError, InvalidArgumentError } from './Errors'
-import { Graph } from './Graph'
+import { IdentifierError, InvalidArgumentError } from './api/Errors'
+import { Graph } from './api/Graph'
 
 /**
  * An implementation of the Node interface.
@@ -22,10 +22,8 @@ export class NodeImpl implements Node {
    *
    * @param graph - The graph that the node is being created in.
    * @param name - The name of this node.
-   * @returns - {@link Result}<{@link Node}> Returns the node that was just
-   *            created.
-   *          - {@link Result}<{@link IdentifierError}> If there is already
-   *            a node in the graph with the given name.
+   * @returns The new node, or an IdentifierError if there is already a node in
+   *          the provided graph with the given name.
    */
   static new (graph: Graph, name: string): Result<NodeImpl, IdentifierError> {
     const node = new NodeImpl(graph)
